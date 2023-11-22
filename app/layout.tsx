@@ -1,9 +1,7 @@
-
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import { Providers } from './providers'
-
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,11 +18,10 @@ export default function RootLayout({
       <body className="lg:pt-5 bg-slate-800 min-h-screen">
         <Providers>
           <Navbar />
-          <main className="flex flex-col items-center justify-center w-full p-2 max-w-[1100px] mx-auto">
+          <main className="flex flex-col items-center justify-center w-full p-2 max-w-[1100px] mx-auto overflow-x-hidden">
             {children}
           </main>
         </Providers>
-
       </body>
     </html>
   );
