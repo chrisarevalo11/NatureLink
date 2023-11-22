@@ -13,6 +13,7 @@
     "@thirdweb-dev/sdk": "^4.0.16",
     "ethers": "5",
     "next": "14.0.3",
+    "pino-pretty": "^10.2.3",
     "react": "^18",
     "react-dom": "^18"
   },
