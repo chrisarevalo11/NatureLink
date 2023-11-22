@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ethersproject/providers": "^5.7.2",
+    "@lens-protocol/react-web": "2.0.0-alpha.21",
     "@thirdweb-dev/react": "^4.1.9",
     "@thirdweb-dev/sdk": "^4.0.16",
     "ethers": "5",

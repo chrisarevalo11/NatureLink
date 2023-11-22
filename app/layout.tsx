@@ -1,7 +1,9 @@
+
 import type { Metadata } from "next";
 import "./globals.css";
-import { ThirdWebProvider } from "./providers";
 import Navbar from "@/components/Navbar";
+import { Providers } from './providers'
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,12 +18,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="lg:pt-5 bg-slate-800 min-h-screen">
-        <ThirdWebProvider>
+        <Providers>
           <Navbar />
           <main className="flex flex-col items-center justify-center w-full p-2 max-w-[1100px] mx-auto">
             {children}
           </main>
-        </ThirdWebProvider>
+        </Providers>
+
       </body>
     </html>
   );
