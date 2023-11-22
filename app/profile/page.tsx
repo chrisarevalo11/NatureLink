@@ -1,8 +1,9 @@
 import Banner from "@/components/ProfilePage/Banner";
 import ProfileInfo from "@/components/ProfilePage/ProfileInfo";
 import TabsSection from "@/components/ProfilePage/TabsSection";
+import { ReactNode } from "react";
 
-export default function Component() {
+export default function Component(): ReactNode {
   return (
     <div className="w-full min-h-screen flex flex-col mt-5">
       <Banner />
