@@ -11,7 +11,7 @@
   "dependencies": {
     "@thirdweb-dev/react": "^4.1.9",
     "@thirdweb-dev/sdk": "^4.0.16",
-    "ethers": "5"
+    "ethers": "5",
     "next": "14.0.3",
     "react": "^18",
     "react-dom": "^18"
