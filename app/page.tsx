@@ -1,6 +1,6 @@
 'use client'
+
 import { useOwnedHandles, useProfile } from '@lens-protocol/react-web';
-import { ConnectWallet, useWallet } from '@thirdweb-dev/react';
 
 export default function Home() {
   const { data, error, loading } = useProfile({
@@ -13,13 +13,12 @@ export default function Home() {
   
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <ConnectWallet />
+    <div>
 
       {loading && <p>Cargando perfil...</p>}
       {error && <p>Error al cargar el perfil.</p>}
       {handle && <h1>{JSON.stringify(handle)}</h1>} 
-    </main>
+    </div>
   );
 }
 
