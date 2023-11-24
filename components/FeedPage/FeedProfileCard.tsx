@@ -4,7 +4,7 @@ export default function FeedProfileCard(): ReactElement {
   return (
     <div className="hidden md:block md:w-1/4 h-fit bg-gray-900 p-2 rounded-lg sticky top-3">
       <div className="space-y-2">
-        <img
+        {/* <img
           alt="Profile Picture"
           className="rounded-full mx-auto"
           height="50"
@@ -14,7 +14,7 @@ export default function FeedProfileCard(): ReactElement {
             objectFit: "cover",
           }}
           width="50"
-        />
+        /> */}
         <h2 className="text-xl font-bold text-center">User Name</h2>
         <p className="text-gray-600 dark:text-gray-400 text-sm text-center">
           Bio: This is a user bio
