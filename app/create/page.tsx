@@ -7,6 +7,7 @@ import Hypercert from "@/components/CreateProjectPage/Hypercert";
 export type formValuesTypes = {
   projectName: string;
   bannerImage: string;
+  logo: string;
   description: string;
   link: string;
   startDate: string;
@@ -19,6 +20,7 @@ export default function Create(): ReactNode {
   const [formValues, setFormValues] = useState<formValuesTypes>({
     projectName: "",
     bannerImage: "",
+    logo: "",
     description: "",
     link: "",
     startDate: "",

@@ -47,6 +47,14 @@ export default function ProjectForm({
             label="Background Image"
             inputName="bannerImage"
             inputType="url"
+            placeholder="https://myproject.org/banner.png"
+            isRequired={false}
+            handleChange={handleChange}
+          />
+          <FormField
+            label="logo Image"
+            inputName="logo"
+            inputType="url"
             placeholder="https://myproject.org/logo.png"
             isRequired={false}
             handleChange={handleChange}
@@ -65,7 +73,15 @@ export default function ProjectForm({
             isRequired={false}
             handleChange={handleChange}
           />
-          <div className="flex flex-col md:flex-row md:my-6 gap-2">
+          <FormField
+            label="Amount needed"
+            inputName="amount"
+            inputType="number"
+            placeholder="Amount of money needed in USD"
+            isRequired={true}
+            handleChange={handleChange}
+          />
+          <div className="flex flex-col md:flex-row md:justify-center w-full md:px-2 md:my-6 gap-2">
             <FormField
               label="Start date"
               inputName="startDate"
