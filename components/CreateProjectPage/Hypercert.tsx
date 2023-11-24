@@ -1,6 +1,5 @@
 import { ReactElement } from "react";
 import { formValuesTypes } from "@/app/create/page";
-import Image from "next/image";
 
 type HypercertProps = {
   formValues: formValuesTypes;
@@ -30,8 +29,8 @@ export default function Hypercert({
             }
           : {}
       }
-      className={`w-[95%] p-2 flex flex-col items-center rounded-3xl overflow-hidden justify-around
-       gap-3 text-base-100 md:w-[90%] lg:w-1/3 max-w-[250px] sticky lg:top-4 h-[330px] shadow-xl m-2
+      className={` p-2 flex flex-col items-center rounded-3xl overflow-hidden justify-around
+       gap-3 w-[250px] sticky lg:top-4 h-[330px] shadow-xl m-2
           ${
             isValidURL(bannerImage)
               ? `bg-no-repeat bg-center bg-cover`
@@ -66,7 +65,10 @@ export default function Hypercert({
             tags.map(
               (tag) =>
                 tag && (
-                  <span className="px-2 border-2 border-gray-400 rounded-md">
+                  <span
+                    key={tag}
+                    className="px-2 border-2 border-gray-400 rounded-md"
+                  >
                     {tag}
                   </span>
                 )

@@ -34,7 +34,7 @@ export default function Component() {
           modalTitleIconUrl={""}
           style={{
             borderRadius: "100px",
-            backgroundColor: "#73c358",
+            backgroundColor: "#1EB854",
           }}
         />
       </div>

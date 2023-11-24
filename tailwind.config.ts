@@ -12,12 +12,15 @@ const config: Config = {
         banner: "url('/images/banner.jpg')",
       },
       colors: {
-        green400: "#73c358",
+        green400: "#1EB854",
         green500: "#3f882b",
         green600: "#2b5222",
       },
     },
   },
   plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["forest"],
+  },
 };
 export default config;

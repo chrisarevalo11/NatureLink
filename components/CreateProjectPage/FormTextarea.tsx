@@ -18,13 +18,13 @@ export default function FormTextarea({
   return (
     <>
       <label className="label gap-1">
-        <span className="label-text text-base-100 whitespace-nowrap">
+        <span className="label-text  whitespace-nowrap">
           <span className="text-red-500">* </span>
           {label}
         </span>
       </label>
       <textarea
-        className="textarea textarea-bordered w-full bg-gray-700 text-base-100 resize-none no-scrollbar"
+        className="textarea textarea-bordered w-full bg-gray-700  resize-none no-scrollbar"
         placeholder={placeholder}
         name={inputName}
         onChange={handleChange}

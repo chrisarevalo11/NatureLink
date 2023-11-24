@@ -8,12 +8,13 @@ export type formValuesTypes = {
   projectName: string;
   bannerImage: string;
   logo: string;
-  description: string;
+  description?: string;
   link: string;
+  amount: number;
   startDate: string;
   endDate: string;
   scopeTags: string;
-  contributors: string;
+  contributors?: string;
 };
 
 export default function Create(): ReactNode {
@@ -23,6 +24,7 @@ export default function Create(): ReactNode {
     logo: "",
     description: "",
     link: "",
+    amount: 0,
     startDate: "",
     endDate: "",
     scopeTags: "",
