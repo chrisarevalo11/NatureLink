@@ -38,7 +38,7 @@ export default function FormField({
             className={`input input-bordered w-full join-item bg-gray-700 `}
           />
           <span className="join-item rounded-r-full px-5 bg-gray-800 flex items-center">
-            USD
+            MATIC
           </span>
         </div>
       ) : (
