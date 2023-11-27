@@ -22,7 +22,8 @@ export default function ProjectForm({
         ...formValues,
         [name]: value,
       });
-    }
+    },
+    1000
   );
 
   const formik = useFormik({
