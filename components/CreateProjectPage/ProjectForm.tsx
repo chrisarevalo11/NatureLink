@@ -73,11 +73,13 @@ export default function ProjectForm({
             isRequired={false}
             handleChange={handleChange}
           />
+
           <FormField
+            className="join"
             label="Amount needed"
             inputName="amount"
             inputType="number"
-            placeholder="Amount of money needed in USD"
+            placeholder="Amount of money needed"
             isRequired={true}
             handleChange={handleChange}
           />

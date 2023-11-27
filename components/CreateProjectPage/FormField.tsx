@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 
 type FormFieldProps = {
+  className?: string;
   label: string;
   inputType: string;
   placeholder: string;
@@ -10,6 +11,7 @@ type FormFieldProps = {
 };
 
 export default function FormField({
+  className,
   label,
   inputType,
   placeholder,
@@ -19,20 +21,36 @@ export default function FormField({
 }: FormFieldProps): ReactNode {
   return (
     <>
-      <label className="label ">
+      <label className="label">
         <span className="label-text  whitespace-nowrap">
           {isRequired && <span className="text-red-500">* </span>}
           {label}
         </span>
       </label>
-      <input
-        type={inputType}
-        placeholder={placeholder}
-        name={inputName}
-        onChange={handleChange}
-        required={isRequired}
-        className="input input-bordered w-full bg-gray-700 "
-      />
+      {className ? (
+        <div className={className}>
+          <input
+            type={inputType}
+            placeholder={placeholder}
+            name={inputName}
+            onChange={handleChange}
+            required={isRequired}
+            className={`input input-bordered w-full join-item bg-gray-700 `}
+          />
+          <span className="join-item rounded-r-full px-5 bg-gray-800 flex items-center">
+            USD
+          </span>
+        </div>
+      ) : (
+        <input
+          type={inputType}
+          placeholder={placeholder}
+          name={inputName}
+          onChange={handleChange}
+          required={isRequired}
+          className={`input input-bordered gw-full bg-gray-700 `}
+        />
+      )}
     </>
   );
 }
