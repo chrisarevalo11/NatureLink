@@ -8,8 +8,8 @@ function NavLink({ text, href }: link): React.ReactElement {
 
   return (
     <Link
-      className={`hover:text-green500 transition-all ${
-        isActive && "opacity-40 pointer-events-none"
+      className={`hover:text-emerald-800 transition-all ${
+        isActive && "text-emerald-900 pointer-events-none"
       }`}
       href={href}
     >

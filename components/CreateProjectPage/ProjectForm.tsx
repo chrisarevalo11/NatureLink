@@ -114,7 +114,10 @@ export default function ProjectForm({
         </div>
 
         <div className="card-actions justify-center">
-          <button type="submit" className="btn bg-green400 border-none mb-5">
+          <button
+            type="submit"
+            className="btn btn-primary btn-wide border-none mb-5"
+          >
             Create
           </button>
         </div>
