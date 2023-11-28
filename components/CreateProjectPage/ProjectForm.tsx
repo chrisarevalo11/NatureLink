@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import FormField from "./FormField";
 import FormTextarea from "./FormTextarea";
 import { formValuesTypes } from "@/app/create/page";
+import { useDebouncedCallback } from "use-debounce";
 
 type ProjectFormProps = {
   formValues: formValuesTypes;
@@ -13,16 +14,17 @@ export default function ProjectForm({
   formValues,
   setFormValues,
 }: ProjectFormProps): ReactElement {
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    const { name, value }: { name: string; value: string } = e.target;
+  const handleChange = useDebouncedCallback(
+    (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
+      const { name, value }: { name: string; value: string } = e.target;
 
-    setFormValues({
-      ...formValues,
-      [name]: value,
-    });
-  };
+      setFormValues({
+        ...formValues,
+        [name]: value,
+      });
+    },
+    1000
+  );
 
   const formik = useFormik({
     initialValues: formValues,
@@ -73,11 +75,13 @@ export default function ProjectForm({
             isRequired={false}
             handleChange={handleChange}
           />
+
           <FormField
+            className="join"
             label="Amount needed"
             inputName="amount"
             inputType="number"
-            placeholder="Amount of money needed in USD"
+            placeholder="Amount of money needed"
             isRequired={true}
             handleChange={handleChange}
           />

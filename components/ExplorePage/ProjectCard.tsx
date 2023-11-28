@@ -26,7 +26,7 @@ export default function ProjectCard({
 
   return (
     <div className="card card-compact md:card-normal w-full bg-gray-900  shadow-xl overflow-hidden group relative">
-      <Link href={"#"}>
+      <Link href={"/explore/projects/1"}>
         <figure
           className="w-full h-44"
           style={{
