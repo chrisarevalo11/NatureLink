@@ -14,17 +14,16 @@ export default function ProjectForm({
   formValues,
   setFormValues,
 }: ProjectFormProps): ReactElement {
-  const handleChange = useDebouncedCallback(
-    (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
-      const { name, value }: { name: string; value: string } = e.target;
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    const { name, value }: { name: string; value: string } = e.target;
 
-      setFormValues({
-        ...formValues,
-        [name]: value,
-      });
-    },
-    1000
-  );
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+  };
 
   const formik = useFormik({
     initialValues: formValues,
@@ -85,7 +84,7 @@ export default function ProjectForm({
             isRequired={true}
             handleChange={handleChange}
           />
-          <div className="flex flex-col md:flex-row md:justify-center w-full md:px-2 md:my-6 gap-2">
+          <div className="flex flex-col md:flex-row md:justify-center w-full md:my-6 gap-2">
             <FormField
               label="Start date"
               inputName="startDate"
