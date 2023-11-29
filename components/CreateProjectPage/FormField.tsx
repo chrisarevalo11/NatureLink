@@ -48,7 +48,7 @@ export default function FormField({
           name={inputName}
           onChange={handleChange}
           required={isRequired}
-          className={`input input-bordered gw-full bg-gray-700 `}
+          className={`input input-bordered w-full bg-gray-700 `}
         />
       )}
     </>

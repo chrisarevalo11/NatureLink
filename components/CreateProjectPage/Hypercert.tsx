@@ -24,12 +24,10 @@ export default function Hypercert({
         isValidURL(bannerImage)
           ? {
               backgroundImage: `url(${bannerImage})`,
-              position: "sticky",
-              top: "1em",
             }
           : {}
       }
-      className={` p-2 flex flex-col items-center rounded-3xl overflow-hidden justify-around
+      className={`p-2 flex flex-col items-center rounded-3xl overflow-hidden justify-around
        gap-3 w-[250px] sticky lg:top-4 h-[330px] shadow-xl m-2
           ${
             isValidURL(bannerImage)
@@ -65,12 +63,9 @@ export default function Hypercert({
             tags.map(
               (tag) =>
                 tag && (
-                  <span
-                    key={tag}
-                    className="px-2 border-2 border-gray-400 rounded-md"
-                  >
+                  <div key={tag} className="badge badge-neutral">
                     {tag}
-                  </span>
+                  </div>
                 )
             )}
         </div>

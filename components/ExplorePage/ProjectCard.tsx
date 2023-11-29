@@ -63,7 +63,7 @@ export default function ProjectCard({
           </div>
           <div className="card-actions justify-end">
             <button className="btn btn-primary relative w-full -bottom-24 group-hover:bottom-0 transition-all mt-3 hover-enabled">
-              Donate
+              See more
             </button>
           </div>
         </div>
