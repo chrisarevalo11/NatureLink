@@ -59,7 +59,7 @@ export function NavLinksResponsive({
   return (
     <ul
       className={`absolute z-[10] h-[100vh] inset-0 flex flex-col items-center justify-center gap-20 shadow bg-gray-950 text-primary font-bold rounded-box transition-all ${
-        isSidebarOpen ? "top-0" : "-top-full"
+        isSidebarOpen ? "top-0" : "-top-[200vh]"
       }`}
     >
       {links.map((item) => (
