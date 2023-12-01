@@ -1,5 +1,6 @@
 import { ReactNode, useState } from "react";
 import Hypercert from "../CreateProjectPage/Hypercert";
+import Link from "next/link";
 
 export default function ExploreHypercerts(): ReactNode {
   const [allProjects, setAllProjects] = useState([]);
@@ -20,9 +21,15 @@ export default function ExploreHypercerts(): ReactNode {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-4 py-6 lg:px-6 w-full ">
-      <Hypercert formValues={test} />
-      <Hypercert formValues={test} />
-      <Hypercert formValues={test} />
+      <Link href={"/explore/hypercerts/1"}>
+        <Hypercert formValues={test} />
+      </Link>
+      <Link href={"/explore/hypercerts/1"}>
+        <Hypercert formValues={test} />
+      </Link>
+      <Link href={"/explore/hypercerts/1"}>
+        <Hypercert formValues={test} />
+      </Link>
     </div>
   );
 }
