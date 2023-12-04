@@ -13,13 +13,14 @@
     "@lens-protocol/react-web": "2.0.0-alpha.21",
     "@thirdweb-dev/react": "^4.1.9",
     "@thirdweb-dev/sdk": "^4.0.16",
-    "ethers": "5",
+    "ethers": "5.7.2",
     "next": "14.0.3",
     "pino-pretty": "^10.2.3",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@lens-protocol/metadata": "^1.0.5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
