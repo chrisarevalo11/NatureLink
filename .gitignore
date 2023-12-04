@@ -1,41 +1,56 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-.env
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-.yarn/install-state.gz
-
-# testing
-/coverage
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
+# ==============================================
+# Meta Files (related to the development environment and OS)
+# ==============================================
 .DS_Store
+*.swc
 *.pem
-
-# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# local env files
-.env*.local
+# ==============================================
+# Dependencies
+# ==============================================
+/node_modules/
+/.pnp
+.pnp.js
 
-# vercel
-.vercel
+# ==============================================
+# Build and Production
+# ==============================================
+/build/
+/out/
+/src/assets/contracts
 
-# typescript
-*.tsbuildinfo
+# ==============================================
+# Next.js specific
+# ==============================================
+/.next/
 next-env.d.ts
 
-# locks
+# ==============================================
+# Testing
+# ==============================================
+/coverage/
+
+# ==============================================
+# Environment Variables
+# ==============================================
+.env
+
+# ==============================================
+# Package Managers
+# ==============================================
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
+
+# ==============================================
+# Deployment & Hosting
+# ==============================================
+.vercel
+
+# ==============================================
+# TypeScript
+# ==============================================
+*.tsbuildinfo
