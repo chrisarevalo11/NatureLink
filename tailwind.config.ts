@@ -16,6 +16,9 @@ const config: Config = {
         green500: "#3f882b",
         green600: "#2b5222",
       },
+      animation: {
+        "spin-slow": "spin 5s linear infinite",
+      },
     },
   },
   plugins: [require("daisyui")],
