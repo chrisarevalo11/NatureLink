@@ -37,6 +37,7 @@ next-env.d.ts
 # Environment Variables
 # ==============================================
 .env
+.env.local
 
 # ==============================================
 # Package Managers
