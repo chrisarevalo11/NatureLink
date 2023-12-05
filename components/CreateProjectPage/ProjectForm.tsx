@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import FormField from "./FormField";
 import FormTextarea from "./FormTextarea";
 import { formValuesTypes } from "@/app/create/page";
+import { useDebouncedCallback } from "use-debounce";
 
 type ProjectFormProps = {
   formValues: formValuesTypes;
@@ -73,15 +74,17 @@ export default function ProjectForm({
             isRequired={false}
             handleChange={handleChange}
           />
+
           <FormField
+            className="join"
             label="Amount needed"
             inputName="amount"
             inputType="number"
-            placeholder="Amount of money needed in USD"
+            placeholder="Amount of money needed"
             isRequired={true}
             handleChange={handleChange}
           />
-          <div className="flex flex-col md:flex-row md:justify-center w-full md:px-2 md:my-6 gap-2">
+          <div className="flex flex-col md:flex-row md:justify-center w-full md:my-6 gap-2">
             <FormField
               label="Start date"
               inputName="startDate"
@@ -114,7 +117,10 @@ export default function ProjectForm({
         </div>
 
         <div className="card-actions justify-center">
-          <button type="submit" className="btn bg-green400 border-none mb-5">
+          <button
+            type="submit"
+            className="btn btn-primary btn-wide border-none mb-5"
+          >
             Create
           </button>
         </div>

@@ -4,11 +4,9 @@
 
 * {
   box-sizing: border-box;
-}
-
-body {
   scroll-behavior: smooth;
 }
+
 
 @layer utilities {
   .no-scrollbar::-webkit-scrollbar {
@@ -18,5 +16,22 @@ body {
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hover-enabled {
+    bottom: 0 !important;
+  }
+}
+
+.btn {
+  @apply text-white
+}
+
+@layer base {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
   }
 }

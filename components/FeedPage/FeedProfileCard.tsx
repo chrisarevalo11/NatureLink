@@ -1,19 +1,16 @@
 import { ReactElement } from "react";
+import Image from "next/image";
 
 export default function FeedProfileCard(): ReactElement {
   return (
     <div className="hidden md:block md:w-1/4 h-fit bg-gray-900 p-2 rounded-lg sticky top-3">
       <div className="space-y-2">
-        <img
+        <Image
           alt="Profile Picture"
-          className="rounded-full mx-auto"
-          height="50"
-          src="/placeholder.svg"
-          style={{
-            aspectRatio: "50/50",
-            objectFit: "cover",
-          }}
-          width="50"
+          className="rounded-full object-cover mx-auto"
+          height="100"
+          src="/images/placeholder.jpg"
+          width="100"
         />
         <h2 className="text-xl font-bold text-center">User Name</h2>
         <p className="text-gray-600 dark:text-gray-400 text-sm text-center">

@@ -10,6 +10,7 @@ export type formValuesTypes = {
   logo: string;
   description: string;
   link: string;
+  amount: number;
   startDate: string;
   endDate: string;
   scopeTags: string;
@@ -23,6 +24,7 @@ export default function Create(): ReactNode {
     logo: "",
     description: "",
     link: "",
+    amount: 0,
     startDate: "",
     endDate: "",
     scopeTags: "",

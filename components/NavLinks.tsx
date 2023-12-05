@@ -1,15 +1,16 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Dispatch, ReactElement, SetStateAction } from "react";
 
-function NavLink({ text, href }: link): React.ReactElement {
+function NavLink({ text, href }: link): ReactElement {
   const pathname = usePathname();
 
   const isActive = pathname === href;
 
   return (
     <Link
-      className={`hover:text-green500 transition-all ${
-        isActive && "opacity-40 pointer-events-none"
+      className={`hover:text-emerald-800 transition-all ${
+        isActive && "text-emerald-900 pointer-events-none"
       }`}
       href={href}
     >
@@ -18,20 +19,63 @@ function NavLink({ text, href }: link): React.ReactElement {
   );
 }
 
-export function NavLinksResponsive(): React.ReactElement {
+type ResponsiveNavLinkProps = {
+  text: string;
+  href: string;
+  setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
+};
+
+function ResponsiveNavLink({
+  text,
+  href,
+  setIsSidebarOpen,
+}: ResponsiveNavLinkProps): ReactElement {
+  const pathname = usePathname();
+
+  const isActive = pathname === href;
+
+  return (
+    <Link
+      className={`hover:text-emerald-800 transition-all ${
+        isActive && "text-emerald-900 pointer-events-none"
+      }`}
+      href={href}
+      onClick={() => setIsSidebarOpen(false)}
+    >
+      <li>{text}</li>
+    </Link>
+  );
+}
+
+type NavLinksResponsiveProps = {
+  isSidebarOpen: boolean;
+  setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
+};
+
+export function NavLinksResponsive({
+  isSidebarOpen,
+  setIsSidebarOpen,
+}: NavLinksResponsiveProps): ReactElement {
   return (
     <ul
-      tabIndex={0}
-      className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-gray-800 text-green400 rounded-box w-52"
+      className={`absolute z-[10] h-[100vh] inset-0 flex flex-col items-center justify-center gap-20 shadow bg-gray-950 text-primary font-bold rounded-box transition-all ${
+        isSidebarOpen ? "top-0" : "-top-[200vh]"
+      }`}
     >
       {links.map((item) => (
-        <NavLink key={item.text} text={item.text} href={item.href} />
+        <ResponsiveNavLink
+          setIsSidebarOpen={setIsSidebarOpen}
+          key={item.text}
+          text={item.text}
+          href={item.href}
+        />
       ))}
+      <button onClick={() => setIsSidebarOpen(false)}>✖️</button>
     </ul>
   );
 }
 
-export default function NavLinks(): React.ReactElement {
+export default function NavLinks(): ReactElement {
   return (
     <ul className="hidden lg:flex flex-row items-center gap-3 mx-7 grow font-bold text-green400">
       {links.map((item) => (

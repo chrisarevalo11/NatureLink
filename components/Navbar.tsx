@@ -4,13 +4,20 @@ import { ConnectWallet } from "@thirdweb-dev/react";
 import Logo from "./NavbarLogo";
 import NavLinks, { NavLinksResponsive } from "./NavLinks";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function Component() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
     <nav className="navbar bg-gray-900 lg:min-w-fit lg:w-[60%] lg:max-w-[850px] pe-4 ps-4 lg:rounded-full mx-auto flex justify-around ">
       <div className="navbar-start">
-        <div className="dropdown">
-          <label tabIndex={0} className="btn btn-ghost lg:hidden">
+        <div className="lg:hidden">
+          <button className="btn btn-ghost" onClick={toggleSidebar}>
             <Image
               className=""
               src={"/images/burger.svg"}
@@ -18,8 +25,11 @@ export default function Component() {
               width={20}
               height={20}
             />
-          </label>
-          <NavLinksResponsive />
+          </button>
+          <NavLinksResponsive
+            isSidebarOpen={isSidebarOpen}
+            setIsSidebarOpen={setIsSidebarOpen}
+          />
         </div>
         <Logo />
       </div>
@@ -34,7 +44,7 @@ export default function Component() {
           modalTitleIconUrl={""}
           style={{
             borderRadius: "100px",
-            backgroundColor: "#73c358",
+            backgroundColor: "#1EB854",
           }}
         />
       </div>

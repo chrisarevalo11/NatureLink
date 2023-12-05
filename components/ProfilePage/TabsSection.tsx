@@ -37,13 +37,13 @@ export default function TabsSection(): ReactElement {
     <div className="lg:col-span-2 space-y-6">
       <div
         role="tablist"
-        className="tabs tabs-boxed bg-gray-900 text-base-100 overflow-x-scroll no-scrollbar"
+        className="tabs tabs-boxed bg-gray-900  overflow-x-scroll no-scrollbar"
       >
         {tabs.map((tab, index) => (
           <a
             key={index}
             role="tab"
-            className={`tab text-base-200 ${
+            className={`tab  ${
               activeTabIndex === index && "tab-active pointer-events-none"
             }`}
             onClick={() => handleTabClick(index)}
@@ -54,7 +54,7 @@ export default function TabsSection(): ReactElement {
       </div>
       <div
         style={{ marginTop: "10px" }}
-        className="text-base-100 bg-gray-900 rounded-lg min-h-[150px] flex justify-center items-center p-2"
+        className=" bg-gray-900 rounded-lg min-h-[150px] flex justify-center items-center p-2"
       >
         {tabContent[currentTab]}
       </div>
