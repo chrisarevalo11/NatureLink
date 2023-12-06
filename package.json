@@ -16,10 +16,12 @@
     "@thirdweb-dev/react": "^4.1.10",
     "@thirdweb-dev/sdk": "^4.0.17",
     "ethers": "^5.7.2",
+    "google-map-react": "^2.2.1",
     "next": "14.0.3",
     "pino-pretty": "^10.2.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
     "react-icons": "^4.12.0",
     "use-debounce": "^10.0.0"
   },
