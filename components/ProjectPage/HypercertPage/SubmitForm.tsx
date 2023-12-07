@@ -2,7 +2,6 @@ import { ReactElement, useState } from 'react'
 import FormImageField from './FormImageField'
 import { useFormik } from 'formik'
 import FormField from '@/components/CreateProjectPage/FormField'
-import MapsCard from './MapsCard'
 import FormFilesField from './FormFilesField'
 import FormTextarea from '@/components/CreateProjectPage/FormTextarea'
 
