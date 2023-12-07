@@ -35,23 +35,18 @@ export default function ProjectForm(props: Props): JSX.Element {
 	const formik = useFormik({
 		initialValues: formValues,
 		onSubmit: async () => {
-			try {
-				console.log(formValues)
-				const args: any[] = createProjectArgsDtoToCreateProjectArgs(formValues)
+			console.log(formValues)
+			const args: any[] = createProjectArgsDtoToCreateProjectArgs(formValues)
 
-				const createProjectTx = createProject({
-					args,
-					overrides: { gasLimit: 6000000 }
-				})
+			const createProjectTx = createProject({
+				args,
+				overrides: { gasLimit: 6000000 }
+			})
 
-				const { receipt } = await createProjectTx
-				console.log('hash transaction', receipt.transactionHash)
+			const { receipt } = await createProjectTx
+			console.log('hash transaction', receipt.transactionHash)
 
-				alert('Project created!')
-			} catch (error) {
-				console.log('❌ ', error)
-				alert('Error creating project')
-			}
+			alert('Project created!')
 		}
 	})
 
