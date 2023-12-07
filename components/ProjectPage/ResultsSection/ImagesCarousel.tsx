@@ -7,9 +7,15 @@ import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 
 export default function ImagesCarousel(): ReactElement {
+	const images: string[] = [
+		'/images/plant.jpg',
+		'/images/plant.jpg',
+		'/images/plant.jpg'
+	]
+
 	return (
-		<div className='w-full'>
-			<h1 className='text-2xl font-bold text-center text-primary my-2'>
+		<div className='w-[95vw] md:w-full'>
+			<h1 className='text-2xl font-bold text-center text-primary py-2'>
 				Images
 			</h1>
 			<Swiper
@@ -19,46 +25,18 @@ export default function ImagesCarousel(): ReactElement {
 				navigation
 				className='w-full h-fit'
 			>
-				<SwiperSlide>
-					<div
-						style={{
-							backgroundImage: 'url(/images/plant.jpg)',
-							backgroundSize: 'cover',
-							backgroundPosition: 'center'
-						}}
-						className='h-[300px] w-full rounded-xl'
-					></div>
-				</SwiperSlide>
-				<SwiperSlide>
-					<div
-						style={{
-							backgroundImage: 'url(/images/plant.jpg)',
-							backgroundSize: 'cover',
-							backgroundPosition: 'center'
-						}}
-						className='h-[300px] w-full rounded-xl'
-					></div>
-				</SwiperSlide>
-				<SwiperSlide>
-					<div
-						style={{
-							backgroundImage: 'url(/images/plant.jpg)',
-							backgroundSize: 'cover',
-							backgroundPosition: 'center'
-						}}
-						className='h-[300px] w-full rounded-xl'
-					></div>
-				</SwiperSlide>
-				<SwiperSlide>
-					<div
-						style={{
-							backgroundImage: 'url(/images/plant.jpg)',
-							backgroundSize: 'cover',
-							backgroundPosition: 'center'
-						}}
-						className='h-[300px] w-full rounded-xl'
-					></div>
-				</SwiperSlide>
+				{images.map((image, index) => (
+					<SwiperSlide key={index}>
+						<div
+							style={{
+								backgroundImage: `url(${image})`,
+								backgroundSize: 'cover',
+								backgroundPosition: 'center'
+							}}
+							className='h-[300px] w-full rounded-xl'
+						></div>
+					</SwiperSlide>
+				))}
 			</Swiper>
 		</div>
 	)

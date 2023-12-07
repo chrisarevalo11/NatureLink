@@ -19,7 +19,7 @@ export default function Map({ latitude, longitude }: Props): ReactElement {
 	)
 
 	return (
-		<div className='h-[300px] w-full rounded-xl overflow-hidden'>
+		<div className='h-[300px] w-[95vw] md:w-full mx-auto rounded-xl overflow-hidden'>
 			{!isLoaded ? (
 				<h1>Loading...</h1>
 			) : (
