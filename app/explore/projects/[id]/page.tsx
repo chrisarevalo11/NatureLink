@@ -24,7 +24,9 @@ export default function Page({ params }: { params: { id: string } }) {
 	return (
 		<section className='w-full grid lg:grid-cols-2 rounded-xl mt-2'>
 			<Information project={test} />
+
 			<div className='flex flex-col justify-center rounded-br-xl rounded-bl-xl lg:rounded-bl-none py-4 px-5 lg:rounded-tr-xl bg-slate-950'>
+
 				<Donate RequiredAmount={test.amount} />
 				<div className='divider'>OR</div>
 				<Apply />

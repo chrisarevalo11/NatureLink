@@ -1,20 +1,20 @@
-import { ReactElement } from "react";
+import { ReactElement } from 'react'
 
 type ProjectBannerProps = {
-  bannerImage: string;
-};
+	bannerImage: string
+}
 
 export default function ProjectBanner({
-  bannerImage,
+	bannerImage
 }: ProjectBannerProps): ReactElement {
-  return (
-    <figure
-      style={{
-        backgroundImage: `url(${bannerImage})`,
-        backgroundPosition: "center",
-        backgroundSize: "cover",
-      }}
-      className="h-48 rounded-xl"
-    ></figure>
-  );
+	return (
+		<figure
+			style={{
+				backgroundImage: `url(${bannerImage})`,
+				backgroundPosition: 'center',
+				backgroundSize: 'cover'
+			}}
+			className='h-48 rounded-xl'
+		></figure>
+	)
 }
