@@ -25,13 +25,14 @@
   }
 }
 
-.btn {
-  @apply text-white
-}
-
 @layer base {
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
   }
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  @apply text-primary bg-[#00000099] p-2 rounded-xl
 }
