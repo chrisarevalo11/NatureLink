@@ -1,9 +1,12 @@
 import { BigNumber, ethers } from 'ethers'
-import { BigIntDto } from '@/models/contract-functions-args.model'
-import { Project } from '@/models/contract-functions-args.model'
+import {
+	BigIntDto,
+	Project,
+	ProjectDto
+} from '@/models/contract-functions-args.model'
 
 export function getAllProjectsReturnDtoToGetAllProjectsReturn(
-	projects: any[]
+	projects: ProjectDto[]
 ): Project[] {
 	return projects.map((projectDto: any) => {
 		const idDto: BigIntDto = projectDto[0]

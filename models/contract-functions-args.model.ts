@@ -3,6 +3,17 @@ export interface BigIntDto {
 	_isBigNumber: boolean
 }
 
+export interface ProjectDto {
+	id: BigIntDto
+	amount: BigIntDto
+	projectTime: [BigIntDto, BigIntDto]
+	info: string
+	status: number
+	crowdfundingAddress: string
+	evaluationAddress: string
+	creatorAddress: string
+}
+
 export interface Project {
 	id: number
 	amount: number
