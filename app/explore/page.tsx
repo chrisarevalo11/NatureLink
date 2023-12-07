@@ -32,7 +32,6 @@ export default function Create(): JSX.Element {
 				const proposals: Propousal[] = propousalDtoToPropousal(propousalsDto)
 
 				proposals.map(async (proposal: Propousal, index: number) => {
-					// eslint-disable-next-line @typescript-eslint/no-explicit-any
 					const ethereum = (window as any).ethereum
 
 					const provider: ethers.providers.Web3Provider =
