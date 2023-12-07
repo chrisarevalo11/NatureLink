@@ -19,8 +19,6 @@ export default function ProjectForm(props: Props): JSX.Element {
 
 	const dispatch = useDispatch()
 
-	if (!createProject) return <div>ERROR!</div>
-
 	const handleChange = (
 		event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
 	) => {
@@ -37,6 +35,8 @@ export default function ProjectForm(props: Props): JSX.Element {
 		onSubmit: async () => {
 			console.log(formValues)
 			const args: any[] = createProjectArgsDtoToCreateProjectArgs(formValues)
+
+			if (!createProject) return <div>ERROR!</div>
 
 			const createProjectTx = createProject({
 				args,
