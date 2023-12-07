@@ -1,4 +1,6 @@
-import { ReactNode } from 'react'
+
+import { Dispatch, ReactNode, SetStateAction } from 'react'
+
 
 type FormFieldProps = {
 	className?: string
@@ -35,6 +37,7 @@ export default function FormField({
 						name={inputName}
 						onChange={handleChange}
 						required={isRequired}
+						step={'any'}
 						className={`input input-bordered w-full join-item bg-gray-700 `}
 					/>
 					<span className='join-item rounded-r-full px-5 bg-gray-800 flex items-center'>
@@ -48,6 +51,7 @@ export default function FormField({
 					name={inputName}
 					onChange={handleChange}
 					required={isRequired}
+					step={'any'}
 					className={`input input-bordered w-full bg-gray-700 `}
 				/>
 			)}
