@@ -1,23 +1,30 @@
-import { ChangeEvent, Dispatch, ReactElement } from 'react'
+import { BigNumber } from 'ethers'
 import { useFormik } from 'formik'
+import { ChangeEvent, Dispatch } from 'react'
+import { useDispatch } from 'react-redux'
+import { formValuesTypes } from '@/app/create/page'
+import { natureLinkContractWriteFunctions } from '@/constants/contract-functions'
+import { toDecimal } from '@/functions/utils'
 import FormField from './FormField'
 import FormTextarea from './FormTextarea'
-import { formValuesTypes } from '@/app/create/page'
-import { useDebouncedCallback } from 'use-debounce'
 
-type ProjectFormProps = {
+type Props = {
 	formValues: formValuesTypes
 	setFormValues: Dispatch<React.SetStateAction<formValuesTypes>>
 }
 
-export default function ProjectForm({
-	formValues,
-	setFormValues
-}: ProjectFormProps): ReactElement {
+export default function ProjectForm(props: Props): JSX.Element {
+	const { formValues, setFormValues } = props
+	const { createProject } = natureLinkContractWriteFunctions()
+
+	const dispatch = useDispatch()
+
+	if (!createProject) return <div>ERROR!</div>
+
 	const handleChange = (
-		e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+		event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
 	) => {
-		const { name, value }: { name: string; value: string } = e.target
+		const { name, value }: { name: string; value: string } = event.target
 
 		setFormValues({
 			...formValues,
@@ -27,8 +34,24 @@ export default function ProjectForm({
 
 	const formik = useFormik({
 		initialValues: formValues,
-		onSubmit: () => {
-			console.log(formValues)
+		onSubmit: async () => {
+			try {
+				console.log(formValues)
+				const args: any[] = createProjectArgsDtoToCreateProjectArgs(formValues)
+
+				const createProjectTx = createProject({
+					args,
+					overrides: { gasLimit: 6000000 }
+				})
+
+				const { receipt } = await createProjectTx
+				console.log('hash transaction', receipt.transactionHash)
+
+				alert('Project created!')
+			} catch (error) {
+				console.log('❌ ', error)
+				alert('Error creating project')
+			}
 		}
 	})
 
@@ -127,4 +150,41 @@ export default function ProjectForm({
 			</form>
 		</div>
 	)
+}
+
+function createProjectArgsDtoToCreateProjectArgs(
+	formValues: formValuesTypes
+): any[] {
+	const {
+		projectName,
+		bannerImage,
+		logo,
+		description,
+		link,
+		amount,
+		startDate,
+		endDate,
+		scopeTags,
+		contributors
+	} = formValues
+
+	let amountBN: BigNumber = toDecimal(amount)
+	let projectStartTime: number = new Date(startDate).getTime() / 1000
+	let projectEndTime: number = new Date(endDate).getTime() / 1000
+	let projectTime: number[] = [projectStartTime, projectEndTime]
+	// TODO: Change this to the real evaluation time
+	let evaluationTime: number = new Date('2024-01-01').getTime() / 1000
+	let info: string = `${projectName},${bannerImage},${logo},${description},${link},${scopeTags},${contributors}`
+
+	let args: any[] = [
+		amountBN, // _amount
+		projectStartTime, // _planning
+		projectTime, // _projectTime
+		evaluationTime, // _evaluationTime
+		info // _info
+	]
+
+	console.log('args: ', args)
+
+	return args
 }
