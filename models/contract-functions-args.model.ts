@@ -3,18 +3,7 @@ export interface BigIntDto {
 	_isBigNumber: boolean
 }
 
-export interface ProjectDto {
-	id: BigIntDto
-	amount: BigIntDto
-	projectTime: [BigIntDto, BigIntDto]
-	info: string
-	status: number
-	crowdfundingAddress: string
-	evaluationAddress: string
-	creatorAddress: string
-}
-
-export interface Project {
+export interface Propousal {
 	id: number
 	amount: number
 	projectTimeStart: number
@@ -24,4 +13,47 @@ export interface Project {
 	crowdfundingAddress: string
 	evaluationAddress: string
 	creatorAddress: string
+}
+
+export interface PropousalDto {
+	id: BigIntDto
+	amount: BigIntDto
+	PropousalTime: [BigIntDto, BigIntDto]
+	info: string
+	status: number
+	crowdfundingAddress: string
+	evaluationAddress: string
+	creatorAddress: string
+}
+
+export interface Stake {
+	openForStake: boolean
+	openForWithdraw: boolean
+	bounty: number
+	fee: number
+	deadline: number
+	tokenIdCounter: number
+	threshold: number
+	creator: string
+	treasuryAddress: string
+	hypercertsAddress: string
+	pushCommAddress: string
+	stakers: string[]
+	info: string
+}
+
+export interface StakeDto {
+	openForStake: boolean
+	openForWithdraw: boolean
+	bounty: BigIntDto
+	fee: BigIntDto
+	deadline: BigIntDto
+	tokenIdCounter: BigIntDto
+	threshold: BigIntDto
+	creator: string
+	treasuryAddress: string
+	hypercertsAddress: string
+	pushCommAddress: string
+	stakers: string[]
+	info: string
 }

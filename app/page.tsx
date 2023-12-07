@@ -4,24 +4,24 @@ import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useOwnedHandles, useProfile } from '@lens-protocol/react-web'
 import { useAppSelector } from '@/store'
-import { setProjects } from '@/store/slides/projectsSlide'
 import { useContract, useContractRead } from '@thirdweb-dev/react'
 import natureLinkJson from '@/deployments/mumbai/NatureLink.json'
-import { Project } from '@/models/contract-functions-args.model'
-import { getAllProjectsReturnDtoToGetAllProjectsReturn } from '@/functions/dtos/dtos'
+import { propousalDtoToPropousal } from '@/functions/dtos/dtos'
+import { setPropousals } from '@/store/slides/propousalSlide'
+import { Propousal } from '@/models/contract-functions-args.model'
 
 export default function Home() {
 	const [isSpinning, setIsSpinning] = useState<boolean>(true)
 	const dispatch = useDispatch()
-	const projects = useAppSelector(state => state.projects.projects)
+	const proposals = useAppSelector(state => state.propousal.propousals)
 
-	const { data: contract } = useContract(natureLinkJson.address)
+	const { data: natureLinkContract } = useContract(natureLinkJson.address)
 
 	const {
-		data: getAllProjects,
+		data: proposalsDto,
 		isLoading,
 		error
-	} = useContractRead(contract, 'getAllProjects')
+	} = useContractRead(natureLinkContract, 'getAllProjects')
 
 	/*  const { data, error, loading } = useProfile({
     forHandle: 'test/rookie',
@@ -32,10 +32,9 @@ export default function Home() {
 
 	useEffect(() => {
 		if (!isLoading) {
-			const currentProjects: Project[] =
-				getAllProjectsReturnDtoToGetAllProjectsReturn(getAllProjects)
+			const proposals: Propousal[] = propousalDtoToPropousal(proposalsDto)
 
-			dispatch(setProjects(currentProjects))
+			dispatch(setPropousals(proposals))
 			setIsSpinning(false)
 		}
 	}, [isLoading])
@@ -49,7 +48,7 @@ export default function Home() {
 			{isSpinning ? (
 				<p>Cargando proyectos...</p>
 			) : (
-				<button onClick={() => console.log(projects)}>Click me</button>
+				<button onClick={() => console.log(proposals)}>Click me</button>
 			)}
 		</div>
 	)
