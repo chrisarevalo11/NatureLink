@@ -13,18 +13,16 @@ import { submitResultsType } from './SubmitForm'
 type Props = {
 	handleChange: Dispatch<SetStateAction<submitResultsType>>
 }
-export default function ImageField(props: Props): ReactElement {
+export default function FormFilesField(props: Props): ReactElement {
 	const { handleChange } = props
 
 	const [rejectedFiles, setRejectedFiles] = useState<FileRejection[] | File[]>(
 		[]
 	)
 	const [uploadedFiles, setUploadedFiles] = useState<File[]>([])
+
 	const { getRootProps, getInputProps } = useDropzone({
 		maxFiles: 3,
-		accept: {
-			'image/*': ['.jpeg', '.png', '.jpg']
-		},
 		onDrop: (acceptedFiles, rejected) => {
 			setUploadedFiles(prevFiles => {
 				if (prevFiles.length + acceptedFiles.length > 3) {
@@ -47,7 +45,7 @@ export default function ImageField(props: Props): ReactElement {
 	useEffect(() => {
 		handleChange(prev => ({
 			...prev,
-			images: uploadedFiles
+			files: uploadedFiles
 		}))
 	}, [uploadedFiles])
 
@@ -60,9 +58,10 @@ export default function ImageField(props: Props): ReactElement {
 				>
 					<div
 						style={{
-							backgroundImage: `url(${URL.createObjectURL(file)})`,
-							backgroundSize: 'cover',
-							backgroundPosition: 'center'
+							backgroundImage: 'url(/images/folder.png)',
+							backgroundSize: 'contain',
+							backgroundPosition: 'center',
+							backgroundRepeat: 'no-repeat'
 						}}
 						className='w-full h-[90%] rounded-xl'
 					></div>
