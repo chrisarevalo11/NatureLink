@@ -2,9 +2,11 @@ import { configureStore } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
 import { TypedUseSelectorHook, useSelector } from 'react-redux'
 import { projectsSlice } from './slides/projectsSlide'
+import { natureLinkSlice } from './slides/naturelinkSlide'
 
 const rootReducer = combineReducers({
-	projects: projectsSlice.reducer
+	projects: projectsSlice.reducer,
+	natureLink: natureLinkSlice.reducer
 })
 
 export const store = configureStore({

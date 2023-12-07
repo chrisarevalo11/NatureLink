@@ -1,9 +1,8 @@
+import { Project } from '@/models/contract-functions-args.model'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { useContract, useContractRead } from '@thirdweb-dev/react'
-import natureLinkJson from '@/deployments/mumbai/NatureLink.json'
 
 type InitialState = {
-	projects: any[]
+	projects: Project[]
 }
 
 const initialState: InitialState = {
@@ -17,19 +16,11 @@ export const projectsSlice = createSlice({
 		destroyProjects: state => {
 			state.projects = initialState.projects
 		},
-		getProjects: state => {
-			const { data: contract } = useContract(natureLinkJson.address)
-
-			const {
-				data: projects,
-				isLoading,
-				error
-			} = useContractRead(contract, 'getAllProjects')
-
-			state.projects = projects
+		setProjects: (state, action: PayloadAction<Project[]>) => {
+			state.projects = action.payload
 		}
 	}
 })
 
-export const { getProjects, destroyProjects } = projectsSlice.actions
+export const { destroyProjects, setProjects } = projectsSlice.actions
 export default projectsSlice.reducer
