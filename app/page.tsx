@@ -1,36 +1,34 @@
 'use client'
 
-import { useOwnedHandles, useProfile } from '@lens-protocol/react-web';
-import { Web3Button, useContract, useContractRead } from '@thirdweb-dev/react';
-
-
-
-
-
-
+import React, { useEffect } from 'react';
+import { useLogin } from '@lens-protocol/react-web';
+import { useAddress } from "@thirdweb-dev/react";
 
 
 export default function Home() {
- /*  const { data, error, loading } = useProfile({
-    forHandle: 'test/rookie',
-  }); */
 
-  const handle = useOwnedHandles({
-    for: '0xD496C2D3422F86dCca5b2d7C8728dEDEF6cEE9d0',
-  });
+  
+  const { execute, loading, data, error } = useLogin();
+  const address = useAddress(); // Retrieves the user's wallet address
 
-  const { data: contract } = useContract("0xB6558651A3A4646D83f1030921909fA87EE61A35");
-  const { data: data2 , isLoading, error } = useContractRead(contract, "getAllProjects");
-
+  const login = async () => {
+    if (address) {
+      const result = await execute({ address });
+      // Handle the result if needed
+    } else {
+      // Handle the case where the address is not available
+      console.log(error);
+      console.error("Wallet address not found. Please connect your wallet.");
+    }
+  };
+  
   return (
     <div>
-{/* 
       {loading && <p>Cargando perfil...</p>}
-      {error && <p>Error al cargar el perfil.</p>}
-      {handle && <h1>{JSON.stringify(handle)}</h1>} */}
-     <button onClick={() => console.log(data2)}>Click me</button>
+      {error && <p>Error al cargar el perfil: {error.message}</p>}
+      {data && <h1>{JSON.stringify(data)}</h1>}
+      <button onClick={login}>Click me</button>
     </div>
-
   );
 }
 

@@ -1,14 +1,13 @@
 'use client'
-
-import { ThirdwebProvider, ChainId, metamaskWallet, embeddedWallet, useSigner, useSDK } from '@thirdweb-dev/react'
-import { ethers } from 'ethers'
+import React from 'react';
+import { ThirdwebProvider, ChainId, metamaskWallet, embeddedWallet, useSigner, useSDK, useAddress } from '@thirdweb-dev/react';
+import { Signer, ethers } from 'ethers';
 import { LensProvider, RequiredSigner, development } from "@lens-protocol/react-web";
 import { useTypedDataSignerWrapper } from '@/lib/typedDataSigner';
 import { JsonRpcProvider } from "@ethersproject/providers";
 
-function LensThirdwebProvider({ children }: { children: React.ReactNode }) {
+function LensThirdwebProvider({ children,signer }: { children: React.ReactNode, signer?: Signer }) {
     const sdk = useSDK();
-    const signer = useSigner();
     const signerWrapped = useTypedDataSignerWrapper(signer, sdk);
 
     return (
@@ -19,7 +18,6 @@ function LensThirdwebProvider({ children }: { children: React.ReactNode }) {
                     getSigner: async () => signerWrapped as RequiredSigner,
                     getProvider: async () => new JsonRpcProvider("https://mumbai.rpc.thirdweb.com")
                 }
-                // @ts-ignore: TODO
             }}
         >
             {children}
@@ -27,23 +25,26 @@ function LensThirdwebProvider({ children }: { children: React.ReactNode }) {
     );
 }
 
+export function Providers({ children }: { children: React.ReactNode }) {
+    let signer: Signer | undefined;
 
-export function Providers({ children }: {
-    children: React.ReactNode
-}) {
-
+if (typeof window !== 'undefined' && window.ethereum) {
+    signer = new ethers.providers.Web3Provider(window.ethereum).getSigner() as Signer;
+}
+    
     return (
         <ThirdwebProvider
             clientId={process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID}
             activeChain={ChainId.Mumbai}
+            signer={signer}
             supportedWallets={[
                 metamaskWallet(),
                 embeddedWallet()
             ]}
         >
-            <LensThirdwebProvider>
-            {children}
+            <LensThirdwebProvider signer={signer}>
+                {children}
             </LensThirdwebProvider>
         </ThirdwebProvider>
-    )
+    );
 }
