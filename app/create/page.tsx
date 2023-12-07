@@ -17,7 +17,7 @@ export type formValuesTypes = {
 	contributors: string
 }
 
-export default function Create(): ReactNode {
+export default function Create(): JSX.Element {
 	const [formValues, setFormValues] = useState<formValuesTypes>({
 		projectName: '',
 		bannerImage: '',
