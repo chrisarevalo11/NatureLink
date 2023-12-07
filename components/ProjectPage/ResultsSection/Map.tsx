@@ -6,13 +6,9 @@ import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api'
 type Props = {
 	latitude: number
 	longitude: number
-	zoom: number
-	text: string
 }
 
-export default function MapsCard(props: Props): ReactElement {
-	const { latitude, longitude, zoom } = props
-
+export default function Map({ latitude, longitude }: Props): ReactElement {
 	const { isLoaded } = useLoadScript({
 		googleMapsApiKey: process.env.NEXT_PUBLIC_MAPS_API_KEY as string
 	})
@@ -23,14 +19,14 @@ export default function MapsCard(props: Props): ReactElement {
 	)
 
 	return (
-		<div className='h-full w-full rounded-xl overflow-hidden'>
+		<div className='h-[300px] w-full rounded-xl overflow-hidden'>
 			{!isLoaded ? (
 				<h1>Loading...</h1>
 			) : (
 				<GoogleMap
 					mapContainerClassName='h-full w-full'
 					center={center}
-					zoom={zoom}
+					zoom={14}
 				>
 					<Marker
 						position={{
