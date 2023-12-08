@@ -14,7 +14,7 @@ export default function UsefulFiles(): ReactElement {
 				Useful files
 			</h1>
 			<div className='w-full grid grid-cols-3 gap-3 rounded-xl bg-gray-900 p-3 mx-auto'>
-				{files.map((fileURL, index) => (
+				{files.map((fileURL: string, index: number) => (
 					<div key={index} className='flex flex-col justify-center'>
 						<div
 							style={{

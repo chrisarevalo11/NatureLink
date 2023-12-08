@@ -15,7 +15,7 @@ export default function UsefulLinks(): ReactElement {
 				Useful links
 			</h1>
 			<div className='w-full flex flex-col gap-3 rounded-xl bg-gray-900 p-3 mx-auto'>
-				{links.map((link, index) => (
+				{links.map((link: string, index: number) => (
 					<Link
 						href={link}
 						key={index}
