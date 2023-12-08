@@ -1,8 +1,8 @@
 'use client'
 
 import { ReactElement, useState } from 'react'
-import ResultsContent from './ResultsContent'
-import EvaluationContent from './EvaluationContent'
+import ResultsContent from './Results/ResultsContent'
+import EvaluationContent from './Evaluations/EvaluationContent'
 
 const tabs: string[] = ['Results', 'Evaluation']
 const tabContent: Record<string, ReactElement> = {

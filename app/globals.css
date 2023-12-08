@@ -34,5 +34,5 @@
 
 .swiper-button-prev::after,
 .swiper-button-next::after {
-  @apply text-primary bg-[#00000099] p-2 rounded-xl
+  @apply text-white bg-[#00000099] p-2 rounded-xl
 }
