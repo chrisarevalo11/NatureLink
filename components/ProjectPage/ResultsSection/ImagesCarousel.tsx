@@ -15,9 +15,7 @@ export default function ImagesCarousel(): ReactElement {
 
 	return (
 		<div className='w-[95vw] md:w-full'>
-			<h1 className='text-2xl font-bold text-center text-primary py-2'>
-				Images
-			</h1>
+			<h1 className='text-3xl font-bold text-center py-2'>Images</h1>
 			<Swiper
 				modules={[Navigation, Pagination, A11y]}
 				spaceBetween={50}
@@ -25,7 +23,7 @@ export default function ImagesCarousel(): ReactElement {
 				navigation
 				className='w-full h-fit'
 			>
-				{images.map((image, index) => (
+				{images.map((image: string, index: number) => (
 					<SwiperSlide key={index}>
 						<div
 							style={{
