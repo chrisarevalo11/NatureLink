@@ -10,7 +10,7 @@ export default function EvaluationContent(): ReactElement {
 					There are no evaluation results yet
 				</p>
 			) : (
-				<h1>Evaluation</h1>
+				<div className='w-[95vw] md:w-full grid md:grid-cols-2'></div>
 			)}
 		</Fragment>
 	)
