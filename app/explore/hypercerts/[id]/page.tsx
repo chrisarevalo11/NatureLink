@@ -1,17 +1,12 @@
 import Information from '@/components/ProjectPage/Information'
 import { Fragment, ReactNode } from 'react'
-import { test } from '@/app/explore/projects/[id]/page'
 import Contributors from '@/components/ProjectPage/HypercertPage/Contributors'
 import Evaluators from '@/components/ProjectPage/HypercertPage/Evaluators'
 import Results from '@/components/ProjectPage/ResultsSection/Results'
 import ActionButton from '@/components/ProjectPage/HypercertPage/ActionButton'
+import { test } from '@/constants/constants'
 
-export default function Page({
-	params
-}: {
-	params: { id: string }
-}): ReactNode {
-	const { id } = params
+export default function Page(): JSX.Element {
 	return (
 		<Fragment>
 			<section className='w-full grid lg:grid-cols-2 rounded-xl mt-2'>
