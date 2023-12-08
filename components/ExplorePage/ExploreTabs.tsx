@@ -29,8 +29,6 @@ export default function ExploreTabs(props: Props): JSX.Element {
 		setActiveTabIndex(index)
 	}
 
-	useEffect(() => {}, [])
-
 	return (
 		<>
 			<div role='tablist' className='tabs tabs-boxed w-full bg-gray-900'>

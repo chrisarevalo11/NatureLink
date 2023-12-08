@@ -1,3 +1,5 @@
+'use client'
+
 import { ReactNode, useState } from 'react'
 import Hypercert from '../CreateProjectPage/Hypercert'
 import Link from 'next/link'

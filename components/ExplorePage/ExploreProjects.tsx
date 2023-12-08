@@ -26,8 +26,6 @@ export default function ExploreProjects(props: Props): JSX.Element {
 		contributors: '0x12e3e1, Juan, Rookie'
 	}
 
-	useEffect(() => {}, [])
-
 	return (
 		<>
 			<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 py-6 lg:px-6'>

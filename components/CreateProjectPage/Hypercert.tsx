@@ -1,13 +1,13 @@
-import { ReactElement } from 'react'
+'use client'
+
 import { formValuesTypes } from '@/app/create/page'
 
-type HypercertProps = {
+type Props = {
 	formValues: formValuesTypes
 }
 
-export default function Hypercert({
-	formValues
-}: HypercertProps): ReactElement {
+export default function Hypercert(props: Props): JSX.Element {
+	const { formValues } = props
 	const { projectName, bannerImage, logo, startDate, endDate, scopeTags } =
 		formValues
 

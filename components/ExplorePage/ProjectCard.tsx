@@ -3,7 +3,6 @@
 import { formValuesTypes } from '@/app/create/page'
 import { Project } from '@/models/contract-functions-args.model'
 import Link from 'next/link'
-import { ReactNode, useEffect } from 'react'
 
 type Props = {
 	project?: Project
@@ -25,10 +24,6 @@ export default function ProjectCard(props: Props): JSX.Element {
 	} = projectMetadata
 
 	const contributedAmount = currentAmount || 0
-
-	useEffect(() => {
-		console.log('💥 project 💥 ', project)
-	}, [])
 
 	return (
 		<div className='card card-compact md:card-normal w-full bg-gray-900  shadow-xl overflow-hidden group relative'>
