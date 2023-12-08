@@ -4,7 +4,7 @@ import SubmitForm from './SubmitForm'
 export default function SubmitModal(): ReactElement {
 	const closeModal = () => {
 		const modal: HTMLDialogElement = document.getElementById(
-			'submit'
+			'submit-results'
 		) as HTMLDialogElement
 		if (modal) {
 			modal.close()
@@ -12,7 +12,7 @@ export default function SubmitModal(): ReactElement {
 	}
 
 	return (
-		<dialog id='submit' className='modal modal-bottom sm:modal-middle'>
+		<dialog id='submit-results' className='modal modal-bottom sm:modal-middle'>
 			<div className='modal-box bg-gray-900 maw-h-[90vh] overflow-scroll no-scrollbar relative'>
 				<button
 					onClick={closeModal}
