@@ -11,6 +11,7 @@
   "dependencies": {
     "@chainlink/contracts": "^0.8.0",
     "@ethersproject/providers": "^5.7.2",
+    "@lens-protocol/client": "^2.0.0-alpha.21",
     "@lens-protocol/metadata": "^1.0.5",
     "@lens-protocol/react-web": "2.0.0-alpha.25",
     "@thirdweb-dev/react": "^4.1.10",
