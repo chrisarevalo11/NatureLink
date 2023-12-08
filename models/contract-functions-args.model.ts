@@ -3,6 +3,31 @@ export interface BigIntDto {
 	_isBigNumber: boolean
 }
 
+export interface Evaluation {
+	vrfConsumer: string
+	pushComm: string
+	crowdfunding: string
+	evidence: string
+	judges: string[]
+	evaluatorsSelected: string[]
+}
+
+export interface EvaluationDto {
+	vrfConsumer: string
+	pushComm: string
+	crowdfunding: string
+	evidence: string
+	judges: string[]
+	evaluatorsSelected: string[]
+}
+
+export interface Project {
+	id: number
+	proposal: Propousal
+	stake: Stake
+	evaluation: Evaluation
+}
+
 export interface Propousal {
 	id: number
 	amount: number

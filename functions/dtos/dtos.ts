@@ -1,11 +1,19 @@
 import { BigNumber, ethers } from 'ethers'
 import {
 	BigIntDto,
+	Evaluation,
+	EvaluationDto,
 	Propousal,
 	PropousalDto,
 	Stake,
 	StakeDto
 } from '@/models/contract-functions-args.model'
+
+export function evaluationDtoToEvaluation(
+	evaluationDto: EvaluationDto
+): Evaluation {
+	return evaluationDto
+}
 
 export function propousalDtoToPropousal(
 	projectsDto: PropousalDto[]
@@ -80,8 +88,8 @@ export function stakeDtoToStake(stakeDto: StakeDto): Stake {
 	const tokenIdCounter: number = tokenIdCounterBn.toNumber()
 
 	const thresholdBn: BigNumber = BigNumber.from(stakeDto.threshold._hex)
-	const threshold: number = thresholdBn.toNumber()
-	// TODO: Convert to date
+	let threshold: string | number = ethers.utils.formatEther(thresholdBn)
+	threshold = Number(threshold)
 
 	const creatorDto: string = stakeDto.creator
 	const treasuryAddressDto: string = stakeDto.treasuryAddress
