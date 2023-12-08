@@ -1,6 +1,5 @@
 'use client'
 
-import { formValuesTypes } from '@/app/create/page'
 import Apply from '@/components/ProjectPage/Apply'
 import Donate from '@/components/ProjectPage/Donate'
 import Information from '@/components/ProjectPage/Information'
@@ -11,27 +10,9 @@ import { useRouter } from 'next/navigation'
 import { usePathname } from 'next/navigation'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
+import { test } from '@/constants/constants'
 
-export const test: formValuesTypes = {
-	projectName: 'Project Name',
-	bannerImage:
-		'https://pbs.twimg.com/media/F_KOERzXkAAaXFC?format=jpg&name=small',
-	logo: 'https://pbs.twimg.com/profile_images/1494316842503925764/eJ-0xwBV_400x400.jpg',
-	link: 'https://www.google.com',
-	description:
-		'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ',
-	amount: 18000,
-	startDate: '2024-01-01',
-	endDate: '2022-02-01',
-	scopeTags: 'tag1, tag2, tag3',
-	contributors: '0x12e3e1, Juan, Rookie'
-}
-
-type Props = {
-	id: string
-}
-
-export default function Page(props: Props): JSX.Element {
+export default function Page(): JSX.Element {
 	const project: Project | null = useAppSelector(
 		state => state.project.projectSelected
 	)
