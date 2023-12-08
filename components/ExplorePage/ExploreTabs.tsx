@@ -4,7 +4,7 @@ import { ReactElement, useEffect, useState } from 'react'
 import ExploreProjects from './ExploreProjects'
 import ExploreHypercerts from './ExploreHypercerts'
 import { useAppSelector } from '@/store'
-import { Propousal } from '@/models/contract-functions-args.model'
+import { Project, Propousal } from '@/models/contract-functions-args.model'
 import { getContract } from '@thirdweb-dev/sdk'
 import { useContract, useContractRead } from '@thirdweb-dev/react'
 
@@ -14,12 +14,13 @@ const tabContent: Record<string, ReactElement> = {
 	Hypercerts: <ExploreHypercerts />
 }
 
-export default function ExploreTabs(): JSX.Element {
-	const [activeTabIndex, setActiveTabIndex] = useState<number>(0)
+type Props = {
+	projects: Project[]
+}
 
-	const propousals: Propousal[] = useAppSelector(
-		state => state.propousal.propousals
-	)
+export default function ExploreTabs(props: Props): JSX.Element {
+	const { projects } = props
+	const [activeTabIndex, setActiveTabIndex] = useState<number>(0)
 
 	const currentTab: string = tabs[activeTabIndex]
 
@@ -27,7 +28,9 @@ export default function ExploreTabs(): JSX.Element {
 		setActiveTabIndex(index)
 	}
 
-	useEffect(() => {}, [])
+	useEffect(() => {
+		console.log('💥 projects 💥 ', projects)
+	}, [])
 
 	return (
 		<>
