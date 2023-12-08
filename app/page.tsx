@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useOwnedHandles, useProfile } from '@lens-protocol/react-web'
-import { useAppSelector } from '@/store'
+import { AppDispatch, useAppSelector } from '@/store'
 import { useContract, useContractRead } from '@thirdweb-dev/react'
 import natureLinkJson from '@/deployments/mumbai/NatureLink.json'
 import {
@@ -27,7 +27,7 @@ import { setProjects } from '@/store/slides/projectSlide'
 
 export default function Home() {
 	const [isSpinning, setIsSpinning] = useState<boolean>(true)
-	const dispatch = useDispatch()
+	const dispatch = useDispatch<AppDispatch>()
 	const proposals = useAppSelector(state => state.propousal.propousals)
 
 	const { data: natureLinkContract } = useContract(natureLinkJson.address)
@@ -102,6 +102,7 @@ export default function Home() {
 			fee: await contract.fee(),
 			deadline: await contract.deadline(),
 			tokenIdCounter: await contract.tokenIdCounter(),
+			getMissingAmount: await contract.getMissingAmount(),
 			threshold: await contract.threshold(),
 			creator: await contract.creator(),
 			treasuryAddress: await contract.treasuryAddress(),

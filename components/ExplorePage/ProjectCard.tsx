@@ -1,16 +1,18 @@
-import { formValuesTypes } from '@/app/create/page'
-import Link from 'next/link'
-import { ReactNode } from 'react'
+'use client'
 
-type ProjectCardProps = {
+import { formValuesTypes } from '@/app/create/page'
+import { Project } from '@/models/contract-functions-args.model'
+import Link from 'next/link'
+import { ReactNode, useEffect } from 'react'
+
+type Props = {
+	project?: Project
 	projectMetadata: formValuesTypes
 	currentAmount?: number
 }
 
-export default function ProjectCard({
-	projectMetadata,
-	currentAmount
-}: ProjectCardProps): ReactNode {
+export default function ProjectCard(props: Props): JSX.Element {
+	const { project, projectMetadata, currentAmount } = props
 	const {
 		projectName,
 		bannerImage,
@@ -23,6 +25,10 @@ export default function ProjectCard({
 	} = projectMetadata
 
 	const contributedAmount = currentAmount || 0
+
+	useEffect(() => {
+		console.log('💥 project 💥 ', project)
+	}, [])
 
 	return (
 		<div className='card card-compact md:card-normal w-full bg-gray-900  shadow-xl overflow-hidden group relative'>

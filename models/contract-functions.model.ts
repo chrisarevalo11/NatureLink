@@ -14,6 +14,14 @@ type contractFunction = UseMutateAsyncFunction<
 	unknown
 > | null
 
-export interface natureLinkFunctions {
+export interface NatureLinkFunctions {
 	createProject: contractFunction
+}
+
+export interface CrowdfundingFunctions {
+	stake: contractFunction
+}
+
+export interface EvaluationFunctions {
+	proposeEvaluator: contractFunction
 }

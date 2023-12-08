@@ -3,19 +3,31 @@
 import { ReactNode, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 import { useFormik } from 'formik'
+import { useAppSelector } from '@/store'
+import { Project } from '@/models/contract-functions-args.model'
+import { crowdfundingContractWriteFunctions } from '@/constants/contract-functions'
 
 type DonateProps = {
 	amount: number
 }
 
-export default function DonationForm(): ReactNode {
+type Props = {
+	project: Project | null
+}
+
+export default function DonationForm(props: Props): JSX.Element {
+	const { project } = props
 	const [values, setValues] = useState<DonateProps>({
 		amount: 0
 	})
 
+	const { stake } = crowdfundingContractWriteFunctions(
+		project?.proposal.crowdfundingAddress || ''
+	)
+
 	const handleChange = useDebouncedCallback(
-		(e: React.ChangeEvent<HTMLInputElement>) => {
-			const { name, value }: { name: string; value: string } = e.target
+		(event: React.ChangeEvent<HTMLInputElement>) => {
+			const { name, value }: { name: string; value: string } = event.target
 			setValues({
 				...values,
 				[name]: parseInt(value)
@@ -26,8 +38,40 @@ export default function DonationForm(): ReactNode {
 
 	const formik = useFormik({
 		initialValues: values,
-		onSubmit: () => {
+		onSubmit: async () => {
 			console.log(values)
+			console.log('project', project)
+
+			const missingAmount: number | undefined = project?.stake.getMissingAmount
+
+			if (!missingAmount) {
+				alert('Threshold not found')
+				return
+			}
+
+			if (values.amount > missingAmount) {
+				alert('Amount must be less or equal than threshold')
+				return
+			}
+
+			if (!project?.proposal.crowdfundingAddress) {
+				alert('Crowdfunding address not found')
+				return
+			}
+
+			if (!stake) {
+				alert('Stake function not found')
+				return
+			}
+
+			const stakeTx = stake({
+				overrides: { gasLimit: 6000000, value: values.amount }
+			})
+
+			const { receipt } = await stakeTx
+			console.log('hash transaction', receipt.transactionHash)
+
+			alert('Project created!')
 		}
 	})
 
@@ -45,7 +89,7 @@ export default function DonationForm(): ReactNode {
 					placeholder='Amount'
 				/>
 				<span className='px-5 bg-gray-800 flex items-center rounded-r-full'>
-					MATIC
+					MATIC (wei)
 				</span>
 			</div>
 			<button

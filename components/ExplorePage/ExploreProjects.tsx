@@ -1,8 +1,16 @@
-import { ReactNode, useState } from 'react'
-import ProjectCard from './ProjectCard'
+'use client'
 
-export default function ExploreProjects(): ReactNode {
-	const [allProjects, setAllProjects] = useState([])
+import { ReactNode, useEffect, useState } from 'react'
+import ProjectCard from './ProjectCard'
+import { Project } from '@/models/contract-functions-args.model'
+
+type Props = {
+	projects: Project[]
+}
+
+export default function ExploreProjects(props: Props): JSX.Element {
+	const { projects } = props
+
 	const test = {
 		projectName: 'Project Name',
 		bannerImage:
@@ -18,11 +26,23 @@ export default function ExploreProjects(): ReactNode {
 		contributors: '0x12e3e1, Juan, Rookie'
 	}
 
+	useEffect(() => {}, [])
+
 	return (
-		<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 py-6 lg:px-6'>
-			<ProjectCard projectMetadata={test} currentAmount={9000} />
-			<ProjectCard projectMetadata={test} currentAmount={12000} />
-			<ProjectCard projectMetadata={test} currentAmount={2000} />
-		</div>
+		<>
+			<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 py-6 lg:px-6'>
+				{projects.map((project: Project) => (
+					<ProjectCard
+						key={project.id}
+						project={project}
+						projectMetadata={test}
+						currentAmount={12000}
+					/>
+				))}
+				<ProjectCard projectMetadata={test} currentAmount={12000} />
+				<ProjectCard projectMetadata={test} currentAmount={12000} />
+				<ProjectCard projectMetadata={test} currentAmount={2000} />
+			</div>
+		</>
 	)
 }

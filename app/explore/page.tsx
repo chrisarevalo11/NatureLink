@@ -15,10 +15,11 @@ import {
 	Propousal,
 	StakeDto
 } from '@/models/contract-functions-args.model'
-import { useAppSelector } from '@/store'
+import { AppDispatch, useAppSelector } from '@/store'
 import { setPropousals } from '@/store/slides/propousalSlide'
 import { useContract, useContractRead } from '@thirdweb-dev/react'
 import { Contract, ethers } from 'ethers'
+
 import {
 	getCrowdfundingContract,
 	getEvaluationContract
@@ -27,7 +28,7 @@ import { setProjects } from '@/store/slides/projectSlide'
 
 export default function Create(): JSX.Element {
 	const [isSpinning, setIsSpinning] = useState<boolean>(false)
-	const dispatch = useDispatch()
+	const dispatch = useDispatch<AppDispatch>()
 	const projects = useAppSelector(state => state.project.projects)
 
 	const { data: natureLinkContract } = useContract(natureLinkJson.address)
@@ -92,6 +93,7 @@ export default function Create(): JSX.Element {
 			fee: await contract.fee(),
 			deadline: await contract.deadline(),
 			tokenIdCounter: await contract.tokenIdCounter(),
+			getMissingAmount: await contract.getMissingAmount(),
 			threshold: await contract.threshold(),
 			creator: await contract.creator(),
 			treasuryAddress: await contract.treasuryAddress(),

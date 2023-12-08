@@ -87,6 +87,13 @@ export function stakeDtoToStake(stakeDto: StakeDto): Stake {
 	)
 	const tokenIdCounter: number = tokenIdCounterBn.toNumber()
 
+	const getMissingAmountBn: BigNumber = BigNumber.from(
+		stakeDto.getMissingAmount._hex
+	)
+	let getMissingAmount: string | number =
+		ethers.utils.formatEther(getMissingAmountBn)
+	getMissingAmount = Number(getMissingAmount)
+
 	const thresholdBn: BigNumber = BigNumber.from(stakeDto.threshold._hex)
 	let threshold: string | number = ethers.utils.formatEther(thresholdBn)
 	threshold = Number(threshold)
@@ -105,6 +112,7 @@ export function stakeDtoToStake(stakeDto: StakeDto): Stake {
 		fee: fee,
 		deadline: deadline,
 		tokenIdCounter: tokenIdCounter,
+		getMissingAmount: getMissingAmount,
 		threshold: threshold,
 		creator: creatorDto,
 		treasuryAddress: treasuryAddressDto,

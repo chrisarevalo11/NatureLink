@@ -8,29 +8,28 @@ import { Project, Propousal } from '@/models/contract-functions-args.model'
 import { getContract } from '@thirdweb-dev/sdk'
 import { useContract, useContractRead } from '@thirdweb-dev/react'
 
-const tabs: string[] = ['Projects', 'Hypercerts']
-const tabContent: Record<string, ReactElement> = {
-	Projects: <ExploreProjects />,
-	Hypercerts: <ExploreHypercerts />
-}
-
 type Props = {
 	projects: Project[]
 }
 
 export default function ExploreTabs(props: Props): JSX.Element {
 	const { projects } = props
+	const tabs: string[] = ['Projects', 'Hypercerts']
 	const [activeTabIndex, setActiveTabIndex] = useState<number>(0)
 
-	const currentTab: string = tabs[activeTabIndex]
+	const getTabContent = (currentTab: string): ReactElement => {
+		const content: Record<string, JSX.Element> = {
+			Projects: <ExploreProjects projects={projects} />,
+			Hypercerts: <ExploreHypercerts projects={projects} />
+		}
+		return content[currentTab]
+	}
 
 	const handleTabClick = (index: number) => {
 		setActiveTabIndex(index)
 	}
 
-	useEffect(() => {
-		console.log('💥 projects 💥 ', projects)
-	}, [])
+	useEffect(() => {}, [])
 
 	return (
 		<>
@@ -52,7 +51,7 @@ export default function ExploreTabs(props: Props): JSX.Element {
 				style={{ marginTop: '10px' }}
 				className='flex justify-center w-full items-center p-2'
 			>
-				{tabContent[currentTab]}
+				{getTabContent(tabs[activeTabIndex])}
 			</div>
 		</>
 	)

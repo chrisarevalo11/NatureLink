@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction, Slice } from '@reduxjs/toolkit'
 
 type InitialState = {
 	createProject: string | null
@@ -8,7 +8,7 @@ const initialState: InitialState = {
 	createProject: null
 }
 
-export const natureLinkSlice = createSlice({
+export const natureLinkSlice: Slice<InitialState> = createSlice({
 	name: 'natureLink',
 	initialState,
 	reducers: {

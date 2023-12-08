@@ -1,9 +1,13 @@
 import { ReactNode, useState } from 'react'
 import Hypercert from '../CreateProjectPage/Hypercert'
 import Link from 'next/link'
+import { Project } from '@/models/contract-functions-args.model'
 
-export default function ExploreHypercerts(): ReactNode {
-	const [allProjects, setAllProjects] = useState([])
+type Props = {
+	projects: Project[]
+}
+
+export default function ExploreHypercerts(props: Props): JSX.Element {
 	const test = {
 		projectName: 'Project Name',
 		bannerImage:

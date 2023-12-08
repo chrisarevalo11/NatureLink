@@ -58,6 +58,7 @@ export interface Stake {
 	fee: number
 	deadline: number
 	tokenIdCounter: number
+	getMissingAmount: number
 	threshold: number
 	creator: string
 	treasuryAddress: string
@@ -74,6 +75,7 @@ export interface StakeDto {
 	fee: BigIntDto
 	deadline: BigIntDto
 	tokenIdCounter: BigIntDto
+	getMissingAmount: BigIntDto
 	threshold: BigIntDto
 	creator: string
 	treasuryAddress: string

@@ -1,7 +1,16 @@
+'use client'
+
 import { formValuesTypes } from '@/app/create/page'
 import Apply from '@/components/ProjectPage/Apply'
 import Donate from '@/components/ProjectPage/Donate'
 import Information from '@/components/ProjectPage/Information'
+import { Project } from '@/models/contract-functions-args.model'
+import { AppDispatch, useAppSelector } from '@/store'
+import { getprojectById } from '@/store/slides/projectSlide'
+import { useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 
 export const test: formValuesTypes = {
 	projectName: 'Project Name',
@@ -18,18 +27,38 @@ export const test: formValuesTypes = {
 	contributors: '0x12e3e1, Juan, Rookie'
 }
 
-export default function Page({ params }: { params: { id: string } }) {
-	const { id } = params
+type Props = {
+	id: string
+}
+
+export default function Page(props: Props): JSX.Element {
+	const project: Project | null = useAppSelector(
+		state => state.project.projectSelected
+	)
+
+	const dispatch = useDispatch<AppDispatch>()
+	const router = useRouter()
+	const pathname: string = usePathname()
+
+	useEffect(() => {
+		const pathnameSplited: string[] = pathname.split('/')
+		const slug: string = pathnameSplited[pathnameSplited.length - 1]
+		const slugNumber: number = parseInt(slug)
+		dispatch(getprojectById(slugNumber))
+
+		if (project === null) {
+			router.push('/explore')
+		}
+	}, [dispatch])
 
 	return (
 		<section className='w-full grid lg:grid-cols-2 rounded-xl mt-2'>
 			<Information project={test} />
 
 			<div className='flex flex-col justify-center rounded-br-xl rounded-bl-xl lg:rounded-bl-none py-4 px-5 lg:rounded-tr-xl bg-slate-950'>
-
-				<Donate RequiredAmount={test.amount} />
+				<Donate RequiredAmount={test.amount} project={project} />
 				<div className='divider'>OR</div>
-				<Apply />
+				<Apply project={project} />
 			</div>
 		</section>
 	)

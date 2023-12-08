@@ -1,5 +1,5 @@
 import { Propousal } from '@/models/contract-functions-args.model'
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction, Slice } from '@reduxjs/toolkit'
 
 type InitialState = {
 	propousals: Propousal[]
@@ -9,7 +9,7 @@ const initialState: InitialState = {
 	propousals: []
 }
 
-export const propousalSlice = createSlice({
+export const propousalSlice: Slice<InitialState> = createSlice({
 	name: 'propousals',
 	initialState,
 	reducers: {
