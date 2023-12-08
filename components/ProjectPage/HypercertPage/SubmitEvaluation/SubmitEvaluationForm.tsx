@@ -1,10 +1,10 @@
 import { ReactElement, useState } from 'react'
 import { useFormik } from 'formik'
-import ImagesCarousel from '../../ResultsSection/ImagesCarousel'
+import ImagesCarousel from '../../ResultsSection/Results/ImagesCarousel'
 import RadioInput from './RadioInput'
-import Map from '../../ResultsSection/Map'
-import UsefulLinks from '../../ResultsSection/UsefulLinks'
-import UsefulFiles from '../../ResultsSection/UsefulFiles'
+import Map from '../../ResultsSection/Results/Map'
+import UsefulLinks from '../../ResultsSection/Results/UsefulLinks'
+import UsefulFiles from '../../ResultsSection/Results/UsefulFiles'
 
 export type submitResultsType = {
 	images: number
