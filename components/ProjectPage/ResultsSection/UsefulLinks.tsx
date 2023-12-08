@@ -10,23 +10,18 @@ export default function UsefulLinks(): ReactElement {
 	]
 
 	return (
-		<div className='w-[95vw] md:w-full'>
-			<h1 className='text-2xl font-bold text-center text-primary py-2'>
-				Useful links
-			</h1>
-			<div className='w-full flex flex-col gap-3 rounded-xl bg-gray-900 p-3 mx-auto'>
-				{links.map((link, index) => (
-					<Link
-						href={link}
-						key={index}
-						target='_blank'
-						className='underline text-primary truncate'
-					>
-						<FiExternalLink className='inline mr-2' />
-						{link}
-					</Link>
-				))}
-			</div>
+		<div className='w-full flex flex-col gap-3 rounded-xl bg-gray-900 p-3 mx-auto'>
+			{links.map((link: string, index: number) => (
+				<Link
+					href={link}
+					key={index}
+					target='_blank'
+					className='underline text-primary truncate'
+				>
+					<FiExternalLink className='inline mr-2' />
+					{link}
+				</Link>
+			))}
 		</div>
 	)
 }

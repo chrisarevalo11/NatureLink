@@ -2,17 +2,27 @@
 
 import Link from 'next/link'
 import { Fragment, ReactElement } from 'react'
-import SubmitModal from './SubmitModal'
+import SubmitModal from './SubmitResults/SubmitModal'
+import SubmitEvaluationModal from './SubmitEvaluation/SubmitEvaluationModal'
 
 export default function ActionButton(): ReactElement {
-	const user: string = 'owner'
+	const user: string = 'evaluator'
 
-	const openSubmitModal = () => {
-		const submitModal: HTMLDialogElement = document.getElementById(
-			'submit'
+	const openSubmitResultsModal = () => {
+		const modal: HTMLDialogElement = document.getElementById(
+			'submit-results'
 		) as HTMLDialogElement
-		if (submitModal) {
-			submitModal.showModal()
+		if (modal) {
+			modal.showModal()
+		}
+	}
+
+	const openSubmitEvaluationModal = () => {
+		const modal: HTMLDialogElement = document.getElementById(
+			'submit-evaluation'
+		) as HTMLDialogElement
+		if (modal) {
+			modal.showModal()
 		}
 	}
 
@@ -20,22 +30,27 @@ export default function ActionButton(): ReactElement {
 		return (
 			<Fragment>
 				<button
-					onClick={openSubmitModal}
+					onClick={openSubmitResultsModal}
 					className='btn btn-primary btn-wide mx-auto my-3'
 				>
 					Submit results
 				</button>
 				<SubmitModal />
 			</Fragment>
-
 		)
 	}
 
-	if (user === 'contributor') {
+	if (user === 'evaluator') {
 		return (
-			<button className='btn btn-primary btn-wide mx-auto my-3'>
-				Evaluate
-			</button>
+			<Fragment>
+				<button
+					onClick={openSubmitEvaluationModal}
+					className='btn btn-primary btn-wide mx-auto my-3'
+				>
+					Evaluate
+				</button>
+				<SubmitEvaluationModal />
+			</Fragment>
 		)
 	}
 
