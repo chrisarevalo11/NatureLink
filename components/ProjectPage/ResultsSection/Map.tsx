@@ -13,10 +13,7 @@ export default function Map({ latitude, longitude }: Props): ReactElement {
 		googleMapsApiKey: process.env.NEXT_PUBLIC_MAPS_API_KEY as string
 	})
 
-	const center = useMemo(
-		() => ({ lat: 4.652939629022646, lng: -74.11940985988831 }),
-		[]
-	)
+	const center = useMemo(() => ({ lat: latitude, lng: longitude }), [])
 
 	return (
 		<div className='h-[300px] w-[95vw] md:w-full mx-auto rounded-xl overflow-hidden'>
@@ -30,8 +27,8 @@ export default function Map({ latitude, longitude }: Props): ReactElement {
 				>
 					<Marker
 						position={{
-							lat: parseFloat(latitude.toString()),
-							lng: parseFloat(longitude.toString())
+							lat: latitude,
+							lng: longitude
 						}}
 					/>
 				</GoogleMap>
