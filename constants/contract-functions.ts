@@ -29,9 +29,11 @@ export function crowdfundingContractWriteFunctions(
 	const { data: contract } = useContract(address, crowndfundingJson.abi)
 
 	const { mutateAsync: stake } = useContractWrite(contract, 'stake')
+	const { mutateAsync: execute } = useContractWrite(contract, 'execute')
 
 	const functions: CrowdfundingFunctions = {
-		stake
+		stake,
+		execute
 	}
 
 	return functions

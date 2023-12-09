@@ -1,11 +1,12 @@
 'use client'
 
-import { ReactNode, useState } from 'react'
+import { ReactNode, use, useEffect, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 import { useFormik } from 'formik'
 import { useAppSelector } from '@/store'
 import { Project } from '@/models/contract-functions-args.model'
 import { crowdfundingContractWriteFunctions } from '@/constants/contract-functions'
+import { useAddress } from '@thirdweb-dev/react'
 
 type DonateProps = {
 	amount: number
@@ -17,13 +18,34 @@ type Props = {
 
 export default function DonationForm(props: Props): JSX.Element {
 	const { project } = props
+	const [isOwner, setIsOwner] = useState<boolean>(false)
+	const [isExecuting, setIsExecuting] = useState<boolean>(false)
 	const [values, setValues] = useState<DonateProps>({
 		amount: 0
 	})
 
-	const { stake } = crowdfundingContractWriteFunctions(
+	const address = useAddress()
+
+	const { stake, execute } = crowdfundingContractWriteFunctions(
 		project?.proposal.crowdfundingAddress || ''
 	)
+
+	useEffect(() => {
+		if (project?.proposal.creatorAddress === address) {
+			setIsOwner(true)
+		}
+
+		const nowDate: Date = new Date()
+		const deadline: number | undefined = project?.stake.deadline
+
+		if (!deadline) {
+			return
+		}
+
+		if (project?.stake.getMissingAmount === 0 && nowDate.getTime() > deadline) {
+			setIsExecuting(true)
+		}
+	}, [address])
 
 	const handleChange = useDebouncedCallback(
 		(event: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,6 +57,45 @@ export default function DonationForm(props: Props): JSX.Element {
 		},
 		400
 	)
+
+	const onExecute = async () => {
+		if (!execute) {
+			alert('Execute function not found')
+			return
+		}
+
+		if (address !== project?.proposal.creatorAddress) {
+			alert('You are not the creator of this project')
+			return
+		}
+
+		const nowDate: Date = new Date()
+		const deadline: number | undefined = project?.stake.deadline
+
+		if (!deadline) {
+			alert('Deadline not found')
+			return
+		}
+
+		if (nowDate.getTime() > deadline) {
+			alert('Deadline is not reached')
+			return
+		}
+
+		if (project?.stake.getMissingAmount === 0) {
+			alert('Fundraising not finished')
+			return
+		}
+
+		const executeTx = execute({
+			overrides: { gasLimit: 6000000 }
+		})
+
+		const { receipt } = await executeTx
+		console.log('hash transaction', receipt.transactionHash)
+
+		alert('Funds executed!')
+	}
 
 	const formik = useFormik({
 		initialValues: values,
@@ -100,6 +161,15 @@ export default function DonationForm(props: Props): JSX.Element {
 				{' '}
 				Donate
 			</button>
+			{isExecuting && (
+				<button
+					className='btn btn-primary btn-wide'
+					disabled={!isOwner}
+					onClick={onExecute}
+				>
+					Execute funds
+				</button>
+			)}
 		</form>
 	)
 }

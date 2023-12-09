@@ -11,13 +11,21 @@ type Props = {
 
 export default function Donate(props: Props): JSX.Element {
 	const { RequiredAmount, project, timeLeft } = props
+
+	const [days, setDays] = useState<number>(0)
+	const [hours, setHours] = useState<number>(0)
+	const [minutes, setMinutes] = useState<number>(0)
+	const [seconds, setSeconds] = useState<number>(0)
+
 	const currentAmount: number = 11000
 
-	const timeLeftDate: Date = new Date(timeLeft * 1000)
-	const [days, setDays] = useState(timeLeftDate.getDate())
-	const [hours, setHours] = useState(timeLeftDate.getHours())
-	const [minutes, setMinutes] = useState(timeLeftDate.getMinutes())
-	const [seconds, setSeconds] = useState(timeLeftDate.getSeconds())
+	if (timeLeft !== 0) {
+		const timeLeftDate: Date = new Date(timeLeft * 1000)
+		setDays(timeLeftDate.getDate())
+		setHours(timeLeftDate.getHours())
+		setMinutes(timeLeftDate.getMinutes())
+		setSeconds(timeLeftDate.getSeconds())
+	}
 
 	useEffect(() => {
 		const timer = setInterval(() => {
@@ -56,9 +64,7 @@ export default function Donate(props: Props): JSX.Element {
 			<DonationForm project={project} />
 			<div className='flex gap-5'>
 				<div>
-					<span className='countdown font-mono text-4xl'>
-						<span style={{ '--value': days }}></span>
-					</span>
+					<span className='countdown font-mono text-4xl'></span>
 					days
 				</div>
 				<div>
