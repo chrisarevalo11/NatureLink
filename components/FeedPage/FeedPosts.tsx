@@ -7,7 +7,7 @@ import {
 	useExplorePublications
 } from '@lens-protocol/react-web'
 import { Publication, Theme } from '@lens-protocol/widgets-react'
-import { Audio } from 'react-loader-spinner'
+//import { Audio } from 'react-loader-spinner'
 import Loader from '../Loader'
 
 export default function FeedPosts(): ReactElement {
@@ -36,7 +36,7 @@ export default function FeedPosts(): ReactElement {
 					>
 						<Publication
 							theme={Theme.dark}
-							publicationData={publication}
+							//publicationData={publication}
 							publicationId={publication.id}
 						/>
 					</div>
