@@ -28,11 +28,8 @@ export default function ProjectCard({ project }: Props): JSX.Element | null {
 	const { getMissingAmount } = project.stake
 	const infoArray: string[] = info.split(',')
 
-	const projectName = infoArray[0]
-	const bannerImage = infoArray[1]
-	const logo = infoArray[2]
-	const description = infoArray[3]
-	const contributors = infoArray[6]
+	const [projectName, bannerImage, logo, description, , , contributors] =
+		infoArray
 
 	const contributedAmount: number = amount - getMissingAmount
 
@@ -64,10 +61,10 @@ export default function ProjectCard({ project }: Props): JSX.Element | null {
 					<h3 className='text-slate-400 text-sm -mt-2 mb-2'>
 						{handleDate(projectTimeStart)} - {handleDate(projectTimeEnd)}
 					</h3>
-					<p className='line-clamp-2 text-sm'>{description}</p>
-					<div className='flex justify-center items-center mt-2 gap-2'>
+					<p className='line-clamp-2 text-sm h-[40px]'>{description}</p>
+					<div className='flex justify-center items-center mt-2 gap-3'>
 						<progress
-							className='progress progress-primary w-full mx-auto'
+							className='progress progress-primary w-full'
 							value={contributedAmount}
 							max={amount}
 						></progress>

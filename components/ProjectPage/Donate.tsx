@@ -5,19 +5,20 @@ import { Project } from '@/models/contract-functions-args.model'
 
 type Props = {
 	RequiredAmount: number
-	project: Project | null
-	timeLeft: number
+	project: Project
 }
 
 export default function Donate(props: Props): JSX.Element {
-	const { RequiredAmount, project, timeLeft } = props
+	const { RequiredAmount, project } = props
 	const currentAmount: number = 11000
 
-	const timeLeftDate: Date = new Date(timeLeft * 1000)
+	const timeLeftDate: Date = new Date(project.proposal.projectTimeStart * 1000)
 	const [days, setDays] = useState(timeLeftDate.getDate())
 	const [hours, setHours] = useState(timeLeftDate.getHours())
 	const [minutes, setMinutes] = useState(timeLeftDate.getMinutes())
 	const [seconds, setSeconds] = useState(timeLeftDate.getSeconds())
+
+	console.log(timeLeftDate)
 
 	useEffect(() => {
 		const timer = setInterval(() => {
@@ -51,7 +52,7 @@ export default function Donate(props: Props): JSX.Element {
 	}, [days, hours, minutes, seconds])
 
 	return (
-		<div className='w-full flex flex-col gap-5'>
+		<div className='w-full flex flex-col items-center gap-5'>
 			<h1 className='text-3xl font-bold text-center'>Donate</h1>
 			<DonationForm project={project} />
 			<div className='flex gap-5'>
