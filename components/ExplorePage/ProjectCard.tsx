@@ -1,6 +1,5 @@
 'use client'
 
-import { formValuesTypes } from '@/app/create/page'
 import { Project } from '@/models/contract-functions-args.model'
 import { getCrowdfundingContract } from '@/services/projects.services'
 import { Contract, ethers } from 'ethers'
@@ -8,29 +7,35 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 type Props = {
-	project?: Project
-	projectMetadata: formValuesTypes
-	currentAmount?: number
+	project: Project
 }
 
-export default function ProjectCard(props: Props): JSX.Element {
-	const { project, projectMetadata, currentAmount } = props
-	const {
-		projectName,
-		bannerImage,
-		logo,
-		description,
-		amount,
-		startDate,
-		endDate,
-		contributors
-	} = projectMetadata
+const handleDate = (date: number): string => {
+	const dateObject: Date = new Date(date * 1000)
 
-	const contributedAmount = currentAmount || 0
+	const year = dateObject.getFullYear()
+	const month = dateObject.getMonth() + 1
+	const day = dateObject.getDate()
+
+	const dateFormatted = `${year}-${month}-${day}`
+
+	return dateFormatted
+}
+
+export default function ProjectCard({ project }: Props): JSX.Element | null {
+	const { id } = project
+	const { info, projectTimeStart, projectTimeEnd, amount } = project?.proposal
+	const { getMissingAmount } = project.stake
+	const infoArray: string[] = info.split(',')
+
+	const [projectName, bannerImage, logo, description, , , contributors] =
+		infoArray
+
+	const contributedAmount: number = amount - getMissingAmount
 
 	return (
 		<div className='card card-compact md:card-normal w-full bg-gray-900  shadow-xl overflow-hidden group relative'>
-			<Link href={'/explore/projects/1'}>
+			<Link href={`/explore/projects/${id}`}>
 				<figure
 					className='w-full h-44'
 					style={{
@@ -54,12 +59,12 @@ export default function ProjectCard(props: Props): JSX.Element {
 						{contributors?.split(',').join(', ')}
 					</h2>
 					<h3 className='text-slate-400 text-sm -mt-2 mb-2'>
-						{startDate} - {endDate}
+						{handleDate(projectTimeStart)} - {handleDate(projectTimeEnd)}
 					</h3>
-					<p className='line-clamp-2 text-sm'>{description}</p>
-					<div className='flex justify-center items-center mt-2 gap-2'>
+					<p className='line-clamp-2 text-sm h-[40px]'>{description}</p>
+					<div className='flex justify-center items-center mt-2 gap-3'>
 						<progress
-							className='progress progress-primary w-56 mx-auto'
+							className='progress progress-primary w-full'
 							value={contributedAmount}
 							max={amount}
 						></progress>

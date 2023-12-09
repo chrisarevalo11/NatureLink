@@ -1,25 +1,25 @@
 'use client'
 
-import { ReactElement, useEffect, useState } from 'react'
+import { ReactElement, useState } from 'react'
 import ExploreProjects from './ExploreProjects'
 import ExploreHypercerts from './ExploreHypercerts'
-import { useAppSelector } from '@/store'
-import { Project, Propousal } from '@/models/contract-functions-args.model'
-import { getContract } from '@thirdweb-dev/sdk'
-import { useContract, useContractRead } from '@thirdweb-dev/react'
+import { Project } from '@/models/contract-functions-args.model'
 
 type Props = {
 	projects: Project[]
+	isSpinning: boolean
 }
 
 export default function ExploreTabs(props: Props): JSX.Element {
-	const { projects } = props
+	const { projects, isSpinning } = props
 	const tabs: string[] = ['Projects', 'Hypercerts']
 	const [activeTabIndex, setActiveTabIndex] = useState<number>(0)
 
 	const getTabContent = (currentTab: string): ReactElement => {
 		const content: Record<string, JSX.Element> = {
-			Projects: <ExploreProjects projects={projects} />,
+			Projects: (
+				<ExploreProjects isSpinning={props.isSpinning} projects={projects} />
+			),
 			Hypercerts: <ExploreHypercerts projects={projects} />
 		}
 		return content[currentTab]
