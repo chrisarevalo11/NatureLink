@@ -1,49 +1,31 @@
 'use client'
 
-import { ReactNode, useEffect, useState } from 'react'
 import ProjectCard from './ProjectCard'
 import { Project } from '@/models/contract-functions-args.model'
+import Loader from '../Loader'
 
 type Props = {
 	projects: Project[]
+	isSpinning: boolean
 }
 
 export default function ExploreProjects(props: Props): JSX.Element {
-	const { projects } = props
-
-	const test = {
-		projectName: 'Project Name',
-		bannerImage:
-			'https://pbs.twimg.com/media/F_KOERzXkAAaXFC?format=jpg&name=small',
-		logo: 'https://pbs.twimg.com/profile_images/1494316842503925764/eJ-0xwBV_400x400.jpg',
-		link: 'https://www.google.com',
-		description:
-			'lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum ',
-		amount: 18000,
-		startDate: '2024-01-01',
-		endDate: '2022-02-01',
-		scopeTags: 'tag1, tag2, tag3',
-		contributors: '0x12e3e1, Juan, Rookie'
-	}
+	const { projects, isSpinning } = props
 
 	return (
 		<>
-			<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 py-6 lg:px-6'>
-				{projects.map((project: Project, index: number) => {
-					console.log(' 💥 project 💥 ', project)
-					return (
-						<ProjectCard
-							key={index}
-							project={project}
-							projectMetadata={test}
-							currentAmount={12000}
-						/>
-					)
-				})}
-				<ProjectCard projectMetadata={test} currentAmount={12000} />
-				<ProjectCard projectMetadata={test} currentAmount={12000} />
-				<ProjectCard projectMetadata={test} currentAmount={2000} />
-			</div>
+			{isSpinning ? (
+				<div className='w-full h-full flex justify-center items-center'>
+					<Loader />
+				</div>
+			) : (
+				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 py-6 lg:px-6 w-full'>
+					{projects.map(
+						(project: Project, index: number) =>
+							project !== null && <ProjectCard key={index} project={project} />
+					)}
+				</div>
+			)}
 		</>
 	)
 }

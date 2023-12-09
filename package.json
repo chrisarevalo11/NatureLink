@@ -12,10 +12,9 @@
   "dependencies": {
     "@chainlink/contracts": "^0.8.0",
     "@ethersproject/providers": "^5.7.2",
-    "@lens-protocol/client": "^2.0.0-alpha.21",
+    "@lens-protocol/metadata": "^1.0.5",
     "@lens-protocol/react-web": "2.0.0-alpha.25",
     "@lens-protocol/widgets-react": "^2.1.0",
-    "@lens-protocol/metadata": "^1.0.5",
     "@react-google-maps/api": "^2.19.2",
     "@reduxjs/toolkit": "^2.0.1",
     "@thirdweb-dev/react": "^4.1.10",
@@ -33,10 +32,6 @@
     "react-dropzone": "^14.2.3",
     "react-icons": "^4.12.0",
     "react-loader-spinner": "^6.1.0",
-    "use-debounce": "^10.0.0"
-  },
-  "devDependencies": {
-    "@lens-protocol/metadata": "^1.1.2",
     "react-redux": "^9.0.2",
     "swiper": "^10.3.1",
     "use-debounce": "^10.0.0"
@@ -44,7 +39,6 @@
   "devDependencies": {
     "@lens-protocol/metadata": "^1.0.5",
     "@types/google-map-react": "^2.1.10",
-
     "@types/node": "^20.10.0",
     "@types/react": "^18.2.38",
     "@types/react-dom": "^18.2.17",
