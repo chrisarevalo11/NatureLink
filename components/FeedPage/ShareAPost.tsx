@@ -12,7 +12,9 @@ import {
 export default function ShareAPost(): ReactElement {
 	const textAreaRef: MutableRefObject<HTMLTextAreaElement | null> = useRef(null)
 	const [content, setContent] = useState<String>('')
+
 	const { execute, error, loading } = useCreatePost()
+
 
 	const maxLength = 250
 
@@ -51,6 +53,7 @@ export default function ShareAPost(): ReactElement {
 					Post
 				</button>
 			</form>
+
 		</div>
 	)
 }

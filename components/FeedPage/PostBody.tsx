@@ -1,18 +1,18 @@
-import { ReactElement } from "react";
+import { ReactElement } from 'react'
 
 type PostCardProps = {
-  postContent: string;
-  postMedia?: string[];
-};
+	postContent: string
+	postMedia?: string[]
+}
 
 export default function PostBody({
-  postContent,
-  postMedia,
+	postContent,
+	postMedia
 }: PostCardProps): ReactElement {
-  return (
-    <div className="m-2">
-      {postContent}
-      <div>{postMedia}</div>
-    </div>
-  );
+	return (
+		<div className='m-2'>
+			{postContent}
+			<div>{postMedia}</div>
+		</div>
+	)
 }

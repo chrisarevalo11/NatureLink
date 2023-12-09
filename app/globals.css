@@ -25,10 +25,6 @@
   }
 }
 
-.btn {
-  @apply text-white
-}
-
 @layer base {
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
@@ -36,7 +32,14 @@
   }
 }
 
+
 .post-container > * {
   background-color: #1F2937 !important;
   width: 100% !important;
 }
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  @apply text-white bg-[#00000099] p-2 rounded-xl
+}
+

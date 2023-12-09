@@ -1,28 +1,30 @@
-import { Contract, Wallet, ethers } from "ethers";
-import natureLinkJson from "../deployments/mumbai/NatureLink.json";
+import { Contract, Wallet, ethers } from 'ethers'
+import natureLinkJson from '../deployments/mumbai/NatureLink.json'
+import crowdfundingJson from '../deployments/mumbai/Crowdfunding.json'
+import evaluationJson from '../deployments/mumbai/Evaluation.json'
 
-const { NEXT_PUBLIC_POLYGON_MUMBAI_RPC_URL, NEXT_PUBLIC_PRIVATE_KEY } =
-  process.env;
+export function getCrowdfundingContract(
+	address: string,
+	signer: ethers.providers.JsonRpcSigner
+) {
+	const crowdfundingContract: Contract = new Contract(
+		address,
+		crowdfundingJson.abi,
+		signer
+	)
 
-if (!NEXT_PUBLIC_POLYGON_MUMBAI_RPC_URL || !NEXT_PUBLIC_PRIVATE_KEY) {
-  throw new Error(
-    "Please set a valid RPC URL and private key in the environment variables"
-  );
+	return crowdfundingContract
 }
 
-const provider = new ethers.providers.JsonRpcProvider(
-  NEXT_PUBLIC_POLYGON_MUMBAI_RPC_URL
-);
-const signer = new Wallet(NEXT_PUBLIC_PRIVATE_KEY, provider);
+export function getEvaluationContract(
+	address: string,
+	signer: ethers.providers.JsonRpcSigner
+) {
+	const evaluationContract: Contract = new Contract(
+		address,
+		evaluationJson.abi,
+		signer
+	)
 
-const naturelinkContract: Contract = new Contract(
-  natureLinkJson.address,
-  natureLinkJson.abi,
-  signer
-);
-
-export async function getAllProjects(): Promise<any> {
-  const projects = await naturelinkContract.getAllProjects();
-  console.log("projects: ", projects);
-  return projects;
+	return evaluationContract
 }

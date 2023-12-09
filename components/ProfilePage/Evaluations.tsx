@@ -1,5 +1,5 @@
-import { ReactElement } from "react";
+import { ReactElement } from 'react'
 
 export default function Evaluations(): ReactElement {
-  return <h1>Evaluations</h1>;
+	return <h1>Evaluations</h1>
 }

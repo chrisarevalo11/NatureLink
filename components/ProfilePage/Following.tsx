@@ -1,5 +1,5 @@
-import { ReactElement } from "react";
+import { ReactElement } from 'react'
 
 export default function Following(): ReactElement {
-  return <h1>Following</h1>;
+	return <h1>Following</h1>
 }

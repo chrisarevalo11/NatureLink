@@ -42,6 +42,7 @@ export default function FeedPosts(): ReactElement {
 					</div>
 				)
 			})}
+
 		</div>
 	)
 }

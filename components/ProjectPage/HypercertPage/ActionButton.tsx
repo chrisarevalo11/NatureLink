@@ -1,28 +1,62 @@
-import Link from "next/link";
-import { ReactElement } from "react";
+'use client'
+
+import Link from 'next/link'
+import { Fragment, ReactElement } from 'react'
+import SubmitModal from './SubmitResults/SubmitModal'
+import SubmitEvaluationModal from './SubmitEvaluation/SubmitEvaluationModal'
 
 export default function ActionButton(): ReactElement {
-  const user: string = "contributor";
+	const user: string = 'evaluator'
 
-  if (user === "owner") {
-    return (
-      <button className="btn btn-primary btn-wide mx-auto my-3">
-        Submit results
-      </button>
-    );
-  }
+	const openSubmitResultsModal = () => {
+		const modal: HTMLDialogElement = document.getElementById(
+			'submit-results'
+		) as HTMLDialogElement
+		if (modal) {
+			modal.showModal()
+		}
+	}
 
-  if (user === "contributor") {
-    return (
-      <button className="btn btn-primary btn-wide mx-auto my-3">
-        Evaluate
-      </button>
-    );
-  }
+	const openSubmitEvaluationModal = () => {
+		const modal: HTMLDialogElement = document.getElementById(
+			'submit-evaluation'
+		) as HTMLDialogElement
+		if (modal) {
+			modal.showModal()
+		}
+	}
 
-  return (
-    <Link href="#results" className="btn btn-primary btn-wide mx-auto my-3">
-      See results
-    </Link>
-  );
+	if (user === 'owner') {
+		return (
+			<Fragment>
+				<button
+					onClick={openSubmitResultsModal}
+					className='btn btn-primary btn-wide mx-auto my-3'
+				>
+					Submit results
+				</button>
+				<SubmitModal />
+			</Fragment>
+		)
+	}
+
+	if (user === 'evaluator') {
+		return (
+			<Fragment>
+				<button
+					onClick={openSubmitEvaluationModal}
+					className='btn btn-primary btn-wide mx-auto my-3'
+				>
+					Evaluate
+				</button>
+				<SubmitEvaluationModal />
+			</Fragment>
+		)
+	}
+
+	return (
+		<Link href='#results' className='btn btn-primary btn-wide mx-auto my-3'>
+			See results
+		</Link>
+	)
 }
