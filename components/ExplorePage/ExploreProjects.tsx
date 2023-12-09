@@ -29,14 +29,17 @@ export default function ExploreProjects(props: Props): JSX.Element {
 	return (
 		<>
 			<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 py-6 lg:px-6'>
-				{projects.map((project: Project) => (
-					<ProjectCard
-						key={project.id}
-						project={project}
-						projectMetadata={test}
-						currentAmount={12000}
-					/>
-				))}
+				{projects.map((project: Project, index: number) => {
+					console.log(' 💥 project 💥 ', project)
+					return (
+						<ProjectCard
+							key={index}
+							project={project}
+							projectMetadata={test}
+							currentAmount={12000}
+						/>
+					)
+				})}
 				<ProjectCard projectMetadata={test} currentAmount={12000} />
 				<ProjectCard projectMetadata={test} currentAmount={12000} />
 				<ProjectCard projectMetadata={test} currentAmount={2000} />
