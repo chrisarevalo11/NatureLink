@@ -1,26 +1,28 @@
-import { formValuesTypes } from '@/app/create/page'
 import ProjectBanner from './ProjectBanner'
 import ProjectHeader from './ProjectHeader'
 import ProjectBody from './ProjectBody'
 import ProjectTags from './ProjectTags'
+import { Project } from '@/models/contract-functions-args.model'
+import { handleDate } from '../ExplorePage/ProjectCard'
 
 type Props = {
-	project: formValuesTypes
+	project: Project
 }
 
-export default function Information(props: Props): JSX.Element {
-	const { project } = props
-	const {
+export default function Information({ project }: Props): JSX.Element {
+	const { info, projectTimeStart, projectTimeEnd } = project?.proposal
+	const infoArray: string[] = info.split(',')
+	const [
 		projectName,
 		bannerImage,
 		logo,
-		link,
 		description,
-		startDate,
-		endDate,
+		link,
 		scopeTags,
 		contributors
-	} = project
+	] = infoArray
+
+	console.log(project)
 
 	return (
 		<div className='flex flex-col gap-3 py-4 px-2 md:px-5 rounded-tl-xl rounded-tr-xl lg:rounded-tr-none lg:rounded-bl-xl bg-gray-900'>
@@ -30,8 +32,8 @@ export default function Information(props: Props): JSX.Element {
 
 			<ProjectBody
 				description={description}
-				startDate={startDate}
-				endDate={endDate}
+				startDate={handleDate(projectTimeStart)}
+				endDate={handleDate(projectTimeEnd)}
 			/>
 			<ProjectTags scopeTags={scopeTags} />
 		</div>
