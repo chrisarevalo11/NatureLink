@@ -1,5 +1,5 @@
 'use client'
-import { useClaimHandle, useLogin } from '@lens-protocol/react-web'
+import { ProfileId, useClaimHandle, useLogin } from '@lens-protocol/react-web'
 import { useAddress } from '@thirdweb-dev/react'
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
@@ -58,7 +58,7 @@ export default function Home() {
 	const login = async () => {
 		if (address) {
 			try {
-				const result = await executeLogin({ address })
+				const result = await executeLogin({ address: address})
 				console.log(result)
 			} catch (err) {
 				console.error('Error during login:', err)
@@ -66,7 +66,7 @@ export default function Home() {
 		} else {
 			console.error('Wallet address not found. Please connect your wallet.')
 		}
-
+	}
 		const fetchProject = async (proposal: Propousal): Promise<Project> => {
 			const ethereum = (window as any).ethereum
 			const provider: ethers.providers.Web3Provider =
@@ -178,5 +178,5 @@ export default function Home() {
 
 			</div>
 		)
-	}
-}
+	
+				}
