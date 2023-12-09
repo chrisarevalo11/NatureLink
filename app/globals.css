@@ -35,3 +35,8 @@
     -webkit-appearance: none;
   }
 }
+
+.post-container > * {
+  background-color: #1F2937 !important;
+  width: 100% !important;
+}
