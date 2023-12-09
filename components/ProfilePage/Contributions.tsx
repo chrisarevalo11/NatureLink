@@ -1,5 +1,5 @@
-import { ReactElement } from "react";
+import { ReactElement } from 'react'
 
 export default function Contributions(): ReactElement {
-  return <h1>Contributions</h1>;
+	return <h1>Contributions</h1>
 }
