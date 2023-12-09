@@ -10,7 +10,7 @@ type Props = {
 	project: Project
 }
 
-const handleDate = (date: number): string => {
+export const handleDate = (date: number): string => {
 	const dateObject: Date = new Date(date * 1000)
 
 	const year = dateObject.getFullYear()
@@ -54,7 +54,7 @@ export default function ProjectCard({ project }: Props): JSX.Element | null {
 						}}
 					></span>
 					<h2 className='card-title'>{projectName}</h2>
-					<h2 className='-mt-2 text-green-300'>
+					<h2 className='-mt-2 text-green-300 truncate text-ellipsis'>
 						<span className='font-bold'>By:</span>{' '}
 						{contributors?.split(',').join(', ')}
 					</h2>
