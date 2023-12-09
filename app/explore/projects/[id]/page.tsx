@@ -10,7 +10,6 @@ import { useRouter } from 'next/navigation'
 import { usePathname } from 'next/navigation'
 import { Fragment, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { test } from '@/constants/constants'
 
 export default function Page(): JSX.Element {
 	const project: Project | null = useAppSelector(
@@ -40,7 +39,7 @@ export default function Page(): JSX.Element {
 			<div className='flex flex-col justify-center rounded-br-xl rounded-bl-xl lg:rounded-bl-none py-4 px-5 lg:rounded-tr-xl bg-slate-950'>
 				{project !== null && (
 					<Fragment>
-						<Donate RequiredAmount={test.amount} project={project} />
+						<Donate project={project} />
 						<div className='divider'>OR</div>
 						<Apply project={project} />
 					</Fragment>
