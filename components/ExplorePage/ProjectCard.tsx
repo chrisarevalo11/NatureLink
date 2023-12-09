@@ -1,7 +1,10 @@
 'use client'
 
 import { Project } from '@/models/contract-functions-args.model'
+import { getCrowdfundingContract } from '@/services/projects.services'
+import { Contract, ethers } from 'ethers'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
 type Props = {
 	project: Project
