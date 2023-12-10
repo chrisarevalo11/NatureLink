@@ -133,6 +133,7 @@ export default function Home() {
 		contract: Contract
 	): Promise<EvaluationDto> => {
 		const evaluatorDto: EvaluationDto = {
+			evaluators: [],
 			vrfConsumer: await contract.vrfConsumer(),
 			pushComm: await contract.pushComm(),
 			crowdfunding: await contract.crowdfunding(),

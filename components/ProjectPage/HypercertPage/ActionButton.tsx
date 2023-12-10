@@ -1,12 +1,29 @@
 'use client'
 
 import Link from 'next/link'
-import { Fragment, ReactElement } from 'react'
+import { Fragment } from 'react'
 import SubmitModal from './SubmitResults/SubmitModal'
 import SubmitEvaluationModal from './SubmitEvaluation/SubmitEvaluationModal'
+import { Project } from '@/models/contract-functions-args.model'
+import { useAddress } from '@thirdweb-dev/react'
 
-export default function ActionButton(): ReactElement {
-	const user: string = 'evaluator'
+type Props = {
+	project: Project
+}
+
+export default function ActionButton(props: Props): JSX.Element {
+	const { project } = props
+	const address: string | undefined = useAddress()
+
+	const evaluators: string[] | undefined = project.evaluation.evaluatorsSelected
+	const evaluator: string | undefined = evaluators.find(
+		(evaluator: string) => evaluator === address
+	)
+
+	const user: string | undefined =
+		project?.proposal.creatorAddress === address
+			? project?.proposal.creatorAddress
+			: undefined
 
 	const openSubmitResultsModal = () => {
 		const modal: HTMLDialogElement = document.getElementById(
@@ -26,7 +43,7 @@ export default function ActionButton(): ReactElement {
 		}
 	}
 
-	if (user === 'owner') {
+	if (user !== undefined) {
 		return (
 			<Fragment>
 				<button
@@ -40,7 +57,7 @@ export default function ActionButton(): ReactElement {
 		)
 	}
 
-	if (user === 'evaluator') {
+	if (evaluator !== undefined) {
 		return (
 			<Fragment>
 				<button
