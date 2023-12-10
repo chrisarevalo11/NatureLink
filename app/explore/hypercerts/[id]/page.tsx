@@ -42,7 +42,7 @@ export default function Page(): JSX.Element {
 				<div className='flex flex-col justify-between rounded-br-xl rounded-bl-xl lg:rounded-bl-none py-5 px-2 lg:px-5 lg:rounded-tr-xl bg-slate-950'>
 					<Contributors contributors={project?.stake.stakers} />
 					<Evaluators evaluators={project?.evaluation.evaluatorsSelected} />
-					<ActionButton />
+					{project !== null && <ActionButton project={project} />}
 				</div>
 			</section>
 			<Results />
