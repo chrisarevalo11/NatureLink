@@ -1,7 +1,25 @@
+'use client'
 import { ReactElement } from 'react'
 import Image from 'next/image'
+import { useAddress } from '@thirdweb-dev/react'
+import { useLogin } from '@lens-protocol/react-web'
 
 export default function FeedProfileCard(): ReactElement {
+	const login = async () => {
+		const { execute: executeLogin, loading, data, error } = useLogin()
+		const address = useAddress()
+		if (address) {
+			try {
+				const result = await executeLogin({ address: address })
+				console.log(result)
+			} catch (err) {
+				console.error('Error during login:', err)
+			}
+		} else {
+			console.error('Wallet address not found. Please connect your wallet.')
+		}
+	}
+
 	return (
 		<div className='hidden md:block md:w-1/4 h-fit bg-gray-900 p-2 rounded-lg sticky top-3'>
 			<div className='space-y-2'>
