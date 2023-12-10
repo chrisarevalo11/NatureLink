@@ -27,6 +27,11 @@ import {
 	getEvaluationContract
 } from '@/services/projects.services'
 import { setProjects } from '@/store/slides/projectSlide'
+import Hero from '@/components/Landing/Hero'
+import Create from '@/components/Landing/Create'
+import Contribute from '@/components/Landing/Contribute'
+import Evaluate from '@/components/Landing/Evaluate'
+import Final from '@/components/Landing/Final'
 
 export default function Home() {
 	const address = useAddress()
@@ -162,8 +167,12 @@ export default function Home() {
 	}, [isLoading])
 
 	return (
-		<div>
-			
+		<div className='flex flex-col gap-10 md:gap-4'>
+			<Hero />
+			<Create />
+			<Contribute />
+			<Evaluate />
+			<Final />
 		</div>
 	)
 }
