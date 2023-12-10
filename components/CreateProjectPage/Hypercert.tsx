@@ -2,7 +2,6 @@
 
 import { handleDate } from '../ExplorePage/ProjectCard'
 import { FormValuesTypes } from '@/app/create/page'
-import { ProposalState } from '@thirdweb-dev/sdk'
 
 type Props = {
 	formValues: FormValuesTypes
@@ -10,6 +9,7 @@ type Props = {
 
 export default function Hypercert(props: Props): JSX.Element {
 	const { formValues } = props
+
 	const { projectName, bannerImage, logo, startDate, endDate, scopeTags } =
 		formValues
 

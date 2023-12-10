@@ -8,7 +8,7 @@ import { AppDispatch, useAppSelector } from '@/store'
 import { getprojectById } from '@/store/slides/projectSlide'
 import { useRouter } from 'next/navigation'
 import { usePathname } from 'next/navigation'
-import { Fragment, useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
 export default function Page(): JSX.Element {
@@ -38,11 +38,11 @@ export default function Page(): JSX.Element {
 
 			<div className='flex flex-col justify-center rounded-br-xl rounded-bl-xl lg:rounded-bl-none py-4 px-5 lg:rounded-tr-xl bg-slate-950'>
 				{project !== null && (
-					<Fragment>
+					<>
 						<Donate project={project} />
 						<div className='divider'>OR</div>
 						<Apply project={project} />
-					</Fragment>
+					</>
 				)}
 			</div>
 		</section>
