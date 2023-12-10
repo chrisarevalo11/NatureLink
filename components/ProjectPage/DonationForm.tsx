@@ -107,7 +107,7 @@ export default function DonationForm(props: Props): JSX.Element {
 			}
 
 			const stakeTx = stake({
-				overrides: { gasLimit: 6000000, value: valuesBI }
+				overrides: { gasLimit: 6000000, value: BigInt(60) }
 			})
 
 			const { receipt } = await stakeTx
