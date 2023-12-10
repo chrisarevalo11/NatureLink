@@ -27,6 +27,11 @@ import {
 	getEvaluationContract
 } from '@/services/projects.services'
 import { setProjects } from '@/store/slides/projectSlide'
+import Hero from '@/components/Landing/Hero'
+import Create from '@/components/Landing/Create'
+import Contribute from '@/components/Landing/Contribute'
+import Evaluate from '@/components/Landing/Evaluate'
+import Final from '@/components/Landing/Final'
 
 export default function Home() {
 	const address = useAddress()
@@ -162,25 +167,12 @@ export default function Home() {
 	}, [isLoading])
 
 	return (
-		<div>
-			{loading && <p>Cargando perfil...</p>}
-			{data && <h1>{JSON.stringify(data)}</h1>}
-			<button className={'btn btn-primary'} onClick={login}>
-				Login
-			</button>
-			<button className={'btn btn-primary'} onClick={handleClaim}>
-				Claim Handle
-			</button>
-
-			{/* 
-      {loading && <p>Cargando perfil...</p>}
-      {error && <p>Error al cargar el perfil.</p>}
-      {handle && <h1>{JSON.stringify(handle)}</h1>} */}
-			{isSpinning ? (
-				<p>Cargando proyectos...</p>
-			) : (
-				<button onClick={() => console.log(proposals)}>Click me</button>
-			)}
+		<div className='flex flex-col gap-10 md:gap-4'>
+			<Hero />
+			<Create />
+			<Contribute />
+			<Evaluate />
+			<Final />
 		</div>
 	)
 }
