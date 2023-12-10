@@ -1,5 +1,4 @@
 import { ReactElement } from 'react'
-import PostCard from './PostCard'
 import ShareAPost from './ShareAPost'
 import {
 	ExplorePublicationType,
@@ -42,7 +41,6 @@ export default function FeedPosts(): ReactElement {
 					</div>
 				)
 			})}
-
 		</div>
 	)
 }
