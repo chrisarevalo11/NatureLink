@@ -125,6 +125,7 @@ export default function Create(): JSX.Element {
 			crowdfunding: await contract.crowdfunding(),
 			evidence: await contract.evidence(),
 			evaluatorCounter: await contract.evaluatorCounter(),
+			evaluators: [],
 			judges: await contract.getAllJudges(),
 			evaluatorsSelected: await contract.getAllEvaluatorsSelected()
 		}
