@@ -24,6 +24,7 @@ export interface CrowdfundingFunctions {
 }
 
 export interface EvaluationFunctions {
+	evaluateEvidence: contractFunction
 	proposeEvaluator: contractFunction
 	setEvidence: contractFunction
 }
