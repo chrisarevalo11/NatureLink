@@ -1,3 +1,5 @@
+'use client'
+
 import { usePathname } from 'next/navigation'
 import { useCallback } from 'react'
 import Particles from 'react-tsparticles'
@@ -7,24 +9,22 @@ import { loadSlim } from 'tsparticles-slim'
 export default function Snow(): JSX.Element | null {
 	const pathname = usePathname()
 
-	// Inicialización de las partículas
+	if (pathname !== '/') {
+		return null
+	}
+
 	const particlesInit = useCallback(async (engine: Engine) => {
 		console.log(engine)
+
 		await loadSlim(engine)
 	}, [])
 
-	// Carga de las partículas
 	const particlesLoaded = useCallback(
 		async (container: Container | undefined) => {
 			await console.log(container)
 		},
 		[]
 	)
-
-	// Si el pathname no es '/', retornar null antes de renderizar el componente
-	if (pathname !== '/') {
-		return null
-	}
 
 	return (
 		<Particles

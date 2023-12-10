@@ -16,12 +16,10 @@ export default function RootLayout({
 	children: React.ReactNode
 }) {
 	return (
-
 		<html lang='en'>
 			<body className='lg:pt-5 bg-slate-800 min-h-screen'>
 				<Providers>
 					<Navbar />
-					<Snow />
 					<main className='flex flex-col items-center justify-center w-full p-2 max-w-[1100px] mx-auto overflow-x-hidden'>
 						{children}
 					</main>
