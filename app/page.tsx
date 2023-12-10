@@ -163,24 +163,7 @@ export default function Home() {
 
 	return (
 		<div>
-			{loading && <p>Cargando perfil...</p>}
-			{data && <h1>{JSON.stringify(data)}</h1>}
-			<button className={'btn btn-primary'} onClick={login}>
-				Login
-			</button>
-			<button className={'btn btn-primary'} onClick={handleClaim}>
-				Claim Handle
-			</button>
-
-			{/* 
-      {loading && <p>Cargando perfil...</p>}
-      {error && <p>Error al cargar el perfil.</p>}
-      {handle && <h1>{JSON.stringify(handle)}</h1>} */}
-			{isSpinning ? (
-				<p>Cargando proyectos...</p>
-			) : (
-				<button onClick={() => console.log(proposals)}>Click me</button>
-			)}
+			
 		</div>
 	)
 }
