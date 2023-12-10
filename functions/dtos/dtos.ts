@@ -21,6 +21,7 @@ export function evaluationDtoToEvaluation(
 		vrfConsumer: evaluationDto.vrfConsumer,
 		pushComm: evaluationDto.pushComm,
 		crowdfunding: evaluationDto.crowdfunding,
+		evaluators: evaluationDto.evaluators,
 		evaluatorCounter: evaluatorCounterNumber,
 		evidence: evaluationDto.evidence,
 		judges: evaluationDto.judges,
