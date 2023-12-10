@@ -12,7 +12,22 @@ import {
 export function evaluationDtoToEvaluation(
 	evaluationDto: EvaluationDto
 ): Evaluation {
-	return evaluationDto
+	const evaluatorCounterDto: BigIntDto = evaluationDto.evaluatorCounter
+	const evaluatorCounterBN: BigNumber = BigNumber.from(evaluatorCounterDto._hex)
+	let evaluatorCounterNumber: string | number = evaluatorCounterBN.toNumber()
+	evaluatorCounterNumber = Number(evaluatorCounterNumber)
+
+	const evaluation: Evaluation = {
+		vrfConsumer: evaluationDto.vrfConsumer,
+		pushComm: evaluationDto.pushComm,
+		crowdfunding: evaluationDto.crowdfunding,
+		evaluatorCounter: evaluatorCounterNumber,
+		evidence: evaluationDto.evidence,
+		judges: evaluationDto.judges,
+		evaluatorsSelected: evaluationDto.evaluatorsSelected
+	}
+
+	return evaluation
 }
 
 export function propousalDtoToPropousal(

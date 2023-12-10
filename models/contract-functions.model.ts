@@ -20,6 +20,7 @@ export interface NatureLinkFunctions {
 
 export interface CrowdfundingFunctions {
 	stake: contractFunction
+	execute: contractFunction
 }
 
 export interface EvaluationFunctions {
