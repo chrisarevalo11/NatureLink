@@ -77,6 +77,16 @@ export default function Create(): JSX.Element {
 		const stake = stakeDtoToStake(stakeDto)
 		const evaluation = evaluationDtoToEvaluation(evaluatorDto)
 
+		const evaluatorCounter: number = evaluation.evaluatorCounter
+
+		let evaluators: string[] = []
+		for (let index = 0; index < evaluatorCounter; index++) {
+			const evaluator: string = await evaluationContract.evaluators(index)
+			evaluators.push(evaluator)
+		}
+
+		evaluation.evaluators = evaluators
+
 		return {
 			id: proposal.id,
 			proposal,

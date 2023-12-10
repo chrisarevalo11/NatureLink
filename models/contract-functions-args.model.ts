@@ -7,6 +7,7 @@ export interface Evaluation {
 	vrfConsumer: string
 	pushComm: string
 	crowdfunding: string
+	evaluators: string[]
 	evaluatorCounter: number
 	evidence: string
 	judges: string[]
@@ -17,6 +18,7 @@ export interface EvaluationDto {
 	vrfConsumer: string
 	pushComm: string
 	crowdfunding: string
+	evaluators: string[]
 	evaluatorCounter: BigIntDto
 	evidence: string
 	judges: string[]

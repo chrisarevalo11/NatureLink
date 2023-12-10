@@ -14,9 +14,11 @@ import {
 } from '@/functions/dtos/dtos'
 import { setPropousals } from '@/store/slides/propousalSlide'
 import {
+	Evaluation,
 	EvaluationDto,
 	Project,
 	Propousal,
+	Stake,
 	StakeDto
 } from '@/models/contract-functions-args.model'
 import { Contract, ethers } from 'ethers'
@@ -88,8 +90,15 @@ export default function Home() {
 		const evaluatorDto: EvaluationDto =
 			await fetchEvaluationDto(evaluationContract)
 
-		const stake = stakeDtoToStake(stakeDto)
-		const evaluation = evaluationDtoToEvaluation(evaluatorDto)
+		const stake: Stake = stakeDtoToStake(stakeDto)
+		const evaluation: Evaluation = evaluationDtoToEvaluation(evaluatorDto)
+
+		const evaluatorCounter: number = evaluation.evaluatorCounter
+
+		for (let index = 0; index < evaluatorCounter; index++) {
+			const evaluator: string = await evaluationContract.evaluators(index)
+			evaluation.evaluators.push(evaluator)
+		}
 
 		return {
 			id: proposal.id,
