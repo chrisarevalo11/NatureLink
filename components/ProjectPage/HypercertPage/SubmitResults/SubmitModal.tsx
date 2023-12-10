@@ -1,7 +1,14 @@
 import { ReactElement } from 'react'
 import SubmitForm from './SubmitForm'
+import { Project } from '@/models/contract-functions-args.model'
 
-export default function SubmitModal(): ReactElement {
+type Props = {
+	project: Project
+}
+
+export default function SubmitModal(props: Props): JSX.Element {
+	const { project } = props
+
 	const closeModal = () => {
 		const modal: HTMLDialogElement = document.getElementById(
 			'submit-results'
@@ -27,7 +34,7 @@ export default function SubmitModal(): ReactElement {
 					These are the aspects of the project development we ask you to
 					demonstrate:{' '}
 				</p>
-				<SubmitForm />
+				<SubmitForm closeModal={closeModal} project={project} />
 			</div>
 		</dialog>
 	)

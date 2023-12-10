@@ -1,5 +1,5 @@
 import { ReactElement, useState } from 'react'
-import PostCard from '@/components/FeedPage/PostCard'
+// import PostCard from '@/components/FeedPage/PostCard'
 
 export default function Activity(): ReactElement {
 	const [posts, setPosts] = useState([])
@@ -10,7 +10,7 @@ export default function Activity(): ReactElement {
 
 	return (
 		<div className='space-y-2 w-full'>
-			<PostCard
+			{/* <PostCard
 				userHandle='chris-arevalo'
 				postContent='sssss'
 				likes={30}
@@ -27,7 +27,7 @@ export default function Activity(): ReactElement {
 				postContent='sssss'
 				likes={30}
 				postMedia={['img1', 'ime1']}
-			/>
+			/> */}
 		</div>
 	)
 }

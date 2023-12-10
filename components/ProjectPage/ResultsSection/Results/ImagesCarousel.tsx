@@ -6,12 +6,12 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 
-export default function ImagesCarousel(): ReactElement {
-	const images: string[] = [
-		'/images/plant.jpg',
-		'/images/plant.jpg',
-		'/images/plant.jpg'
-	]
+type Props = {
+	imagesUrl: string[]
+}
+
+export default function ImagesCarousel(props: Props): JSX.Element {
+	const { imagesUrl } = props
 
 	return (
 		<Swiper
@@ -21,11 +21,11 @@ export default function ImagesCarousel(): ReactElement {
 			navigation
 			className='w-full h-fit'
 		>
-			{images.map((image: string, index: number) => (
+			{imagesUrl?.map((imageUrl: string, index: number) => (
 				<SwiperSlide key={index}>
 					<div
 						style={{
-							backgroundImage: `url(${image})`,
+							backgroundImage: `url(${imageUrl})`,
 							backgroundSize: 'cover',
 							backgroundPosition: 'center'
 						}}

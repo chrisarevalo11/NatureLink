@@ -13,17 +13,19 @@ type Props = {
 
 export default function ActionButton(props: Props): JSX.Element {
 	const { project } = props
-	const address: string | undefined = useAddress()
 
-	const evaluators: string[] | undefined = project.evaluation.evaluatorsSelected
-	const evaluator: string | undefined = evaluators.find(
-		(evaluator: string) => evaluator === address
-	)
+	const address: string | undefined =
+		'0x7753E5f36f20B14fFb6b6a61319Eb66f63abdb0b'
 
 	const user: string | undefined =
 		project?.proposal.creatorAddress === address
 			? project?.proposal.creatorAddress
 			: undefined
+
+	const evaluators: string[] | undefined = project.evaluation.evaluatorsSelected
+	const evaluator: string | undefined = evaluators.find(
+		(evaluator: string) => evaluator === address
+	)
 
 	const openSubmitResultsModal = () => {
 		const modal: HTMLDialogElement = document.getElementById(
@@ -52,7 +54,7 @@ export default function ActionButton(props: Props): JSX.Element {
 				>
 					Submit results
 				</button>
-				<SubmitModal />
+				<SubmitModal project={project} />
 			</Fragment>
 		)
 	}
@@ -66,7 +68,7 @@ export default function ActionButton(props: Props): JSX.Element {
 				>
 					Evaluate
 				</button>
-				<SubmitEvaluationModal />
+				<SubmitEvaluationModal project={project} />
 			</Fragment>
 		)
 	}

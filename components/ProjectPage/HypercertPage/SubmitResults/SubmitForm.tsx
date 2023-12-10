@@ -1,37 +1,92 @@
-import { ReactElement, useState } from 'react'
+import { useState } from 'react'
 import FormImageField from './FormImageField'
 import { useFormik } from 'formik'
 import FormField from '@/components/CreateProjectPage/FormField'
 import FormFilesField from './FormFilesField'
 import FormTextarea from '@/components/CreateProjectPage/FormTextarea'
+import { Evidence } from '@/models/evidence.model'
+import { storageFile } from '@/functions/storeData'
+import { evaluationContractWriteFunctions } from '@/constants/contract-functions'
+import { Project } from '@/models/contract-functions-args.model'
 
 export type submitResultsType = {
 	images: File[]
-	latitude: number
-	longitude: number
+	latitude: string
+	longitude: string
 	files: File[]
-	links: string
+	links: string[]
 }
-export default function SubmitForm(): ReactElement {
-	const [formValues, setFormValues] = useState<submitResultsType>({
+
+type Props = {
+	closeModal: () => void
+	project: Project
+}
+
+export default function SubmitForm(props: Props): JSX.Element {
+	const { closeModal, project } = props
+
+	const initialValues: submitResultsType = {
 		images: [],
-		latitude: 4.652939629022646,
-		longitude: -74.11940985988831,
+		latitude: '',
+		longitude: '',
 		files: [],
-		links: ''
-	})
+		links: []
+	}
+
+	const [formValues, setFormValues] = useState<submitResultsType>(initialValues)
+
+	const { setEvidence } = evaluationContractWriteFunctions(
+		project.proposal.evaluationAddress
+	)
 
 	const handleChange = (
-		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 	) => {
-		const { name, value } = e.target
+		const { name, value } = event.target
 		setFormValues(prev => ({ ...prev, [name]: value }))
 	}
 
 	const formik = useFormik({
 		initialValues: formValues,
-		onSubmit: () => {
-			console.log(formValues)
+		onSubmit: async () => {
+			const imagesUrl: string[] = await Promise.all(
+				formValues.images.map(async (image: File) => {
+					return await storageFile(image)
+				})
+			)
+
+			const filesUrl: string[] = await Promise.all(
+				formValues.files.map(async (file: File) => {
+					return await storageFile(file)
+				})
+			)
+
+			const footprint: string = `${formValues.latitude},${formValues.longitude}`
+			const links: string[] = formValues.links
+
+			const evidence: Evidence = {
+				imagesUrl,
+				footprint,
+				filesUrl,
+				links
+			}
+
+			const evidenceStrinfied: string = JSON.stringify(evidence)
+
+			if (!setEvidence) {
+				return
+			}
+
+			const setEvidenceTx = setEvidence({
+				args: [evidenceStrinfied],
+				overrides: { gasLimit: 6000000 }
+			})
+
+			const { receipt } = await setEvidenceTx
+			console.log('hash transaction', receipt.transactionHash)
+
+			alert('Evidence sent successfully')
+			closeModal()
 		}
 	})
 

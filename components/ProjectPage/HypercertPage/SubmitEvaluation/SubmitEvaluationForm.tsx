@@ -1,30 +1,84 @@
-import { ReactElement, useState } from 'react'
+import { useState } from 'react'
 import { useFormik } from 'formik'
 import ImagesCarousel from '../../ResultsSection/Results/ImagesCarousel'
 import RadioInput from './RadioInput'
 import Map from '../../ResultsSection/Results/Map'
 import UsefulLinks from '../../ResultsSection/Results/UsefulLinks'
 import UsefulFiles from '../../ResultsSection/Results/UsefulFiles'
+import { evaluationContractWriteFunctions } from '@/constants/contract-functions'
+import { Project } from '@/models/contract-functions-args.model'
+import { storageFile } from '@/functions/storeData'
+import { Evidence } from '@/models/evidence.model'
 
 export type submitResultsType = {
-	images: number
-	coordinates: number
-	files: number
-	links: number
-	[key: string]: number
+	images: File[]
+	latitude: string
+	longitude: string
+	files: File[]
+	links: string[]
 }
-export default function SubmitForm(): ReactElement {
-	const [formValues, setFormValues] = useState<submitResultsType>({
-		images: 2,
-		coordinates: 2,
-		files: 2,
-		links: 2
-	})
+
+type Props = {
+	project: Project
+}
+
+export default function SubmitForm(props: Props): JSX.Element {
+	const { project } = props
+
+	const initialValues: submitResultsType = {
+		images: [],
+		latitude: '',
+		longitude: '',
+		files: [],
+		links: []
+	}
+
+	const [formValues, setFormValues] = useState<submitResultsType>(initialValues)
+
+	const { setEvidence } = evaluationContractWriteFunctions(
+		project.proposal.evaluationAddress
+	)
 
 	const formik = useFormik({
 		initialValues: formValues,
-		onSubmit: () => {
-			console.log(formValues)
+		onSubmit: async () => {
+			const imagesUrl: string[] = await Promise.all(
+				formValues.images.map(async (image: File) => {
+					return await storageFile(image)
+				})
+			)
+
+			const filesUrl: string[] = await Promise.all(
+				formValues.files.map(async (file: File) => {
+					return await storageFile(file)
+				})
+			)
+
+			const footprint: string = `${formValues.latitude},${formValues.longitude}`
+			const links: string[] = formValues.links
+
+			const evidence: Evidence = {
+				imagesUrl,
+				footprint,
+				filesUrl,
+				links
+			}
+
+			const evidenceStrinfied: string = JSON.stringify(evidence)
+
+			if (!setEvidence) {
+				return
+			}
+
+			const setEvidenceTx = setEvidence({
+				args: [evidenceStrinfied],
+				overrides: { gasLimit: 6000000 }
+			})
+
+			const { receipt } = await setEvidenceTx
+			console.log('hash transaction', receipt.transactionHash)
+
+			alert('Evidence sent successfully')
 		}
 	})
 

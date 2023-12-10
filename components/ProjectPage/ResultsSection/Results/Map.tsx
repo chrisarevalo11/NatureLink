@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactElement, useMemo } from 'react'
+import { useMemo } from 'react'
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api'
 
 type Props = {
@@ -8,7 +8,9 @@ type Props = {
 	longitude: number
 }
 
-export default function Map({ latitude, longitude }: Props): ReactElement {
+export default function Map(props: Props): JSX.Element {
+	const { latitude, longitude } = props
+
 	const { isLoaded } = useLoadScript({
 		googleMapsApiKey: process.env.NEXT_PUBLIC_MAPS_API_KEY as string
 	})

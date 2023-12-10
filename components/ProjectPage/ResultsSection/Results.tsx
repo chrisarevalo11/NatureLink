@@ -1,12 +1,17 @@
 'use client'
 
-import { ReactNode } from 'react'
+import { Project } from '@/models/contract-functions-args.model'
 import ResultsTabs from './ResultsTabs'
 
-export default function Results(): ReactNode {
+type Props = {
+	project: Project
+}
+
+export default function Results(props: Props): JSX.Element {
+	const { project } = props
 	return (
 		<section id='results' className='my-5 w-full'>
-			<ResultsTabs />
+			<ResultsTabs project={project} />
 		</section>
 	)
 }

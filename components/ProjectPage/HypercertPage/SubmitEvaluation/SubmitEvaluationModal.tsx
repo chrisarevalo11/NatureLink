@@ -1,7 +1,14 @@
-import React, { ReactElement } from 'react'
+import React from 'react'
 import SubmitEvaluationForm from './SubmitEvaluationForm'
+import { Project } from '@/models/contract-functions-args.model'
 
-export default function SubmitModal(): ReactElement {
+type Props = {
+	project: Project
+}
+
+export default function SubmitModal(props: Props): JSX.Element {
+	const { project } = props
+
 	const closeModal = () => {
 		const modal: HTMLDialogElement = document.getElementById(
 			'submit-evaluation'
@@ -28,7 +35,7 @@ export default function SubmitModal(): ReactElement {
 					Answer the questions below regarding the impact of the project and the
 					quality of the results
 				</p>
-				<SubmitEvaluationForm />
+				<SubmitEvaluationForm project={project} />
 			</div>
 		</dialog>
 	)

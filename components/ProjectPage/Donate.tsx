@@ -8,7 +8,8 @@ type Props = {
 	project: Project
 }
 
-export default function Donate({ project }: Props): JSX.Element {
+export default function Donate(props: Props): JSX.Element {
+	const { project } = props
 	const { threshold, getMissingAmount, deadline } = project.stake
 	const contributedAmount: number = threshold - getMissingAmount
 

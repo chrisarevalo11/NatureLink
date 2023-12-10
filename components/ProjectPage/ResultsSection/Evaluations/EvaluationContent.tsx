@@ -1,14 +1,20 @@
-import { Fragment, ReactElement } from 'react'
 import ImagesEvaluation from './ImagesEvaluation'
 import CoordinatesEvaluation from './CoordinatesEvaluation'
 import LinksEvaluation from './LinksEvaluation'
 import FilesEvaluation from './FilesEvaluation'
+import { Project } from '@/models/contract-functions-args.model'
 
-export default function EvaluationContent(): ReactElement {
+type Props = {
+	project: Project
+}
+
+export default function EvaluationContent(props: Props): JSX.Element {
+	const { project } = props
+
 	const evaluationResults = true
 
 	return (
-		<Fragment>
+		<>
 			{!evaluationResults ? (
 				<p className='text-gray-400 my-3'>
 					There are no evaluation results yet
@@ -21,6 +27,6 @@ export default function EvaluationContent(): ReactElement {
 					<FilesEvaluation />
 				</div>
 			)}
-		</Fragment>
+		</>
 	)
 }

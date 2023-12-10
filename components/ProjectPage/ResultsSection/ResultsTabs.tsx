@@ -3,15 +3,25 @@
 import { ReactElement, useState } from 'react'
 import ResultsContent from './Results/ResultsContent'
 import EvaluationContent from './Evaluations/EvaluationContent'
+import { Project } from '@/models/contract-functions-args.model'
 
-const tabs: string[] = ['Results', 'Evaluation']
-const tabContent: Record<string, ReactElement> = {
-	Results: <ResultsContent />,
-	Evaluation: <EvaluationContent />
+type Props = {
+	project: Project
 }
-export default function ResultsTabs(): JSX.Element {
+
+export default function ResultsTabs(props: Props): JSX.Element {
+	const { project } = props
+
+	const tabs: string[] = ['Results', 'Evaluation']
 	const [activeTabIndex, setActiveTabIndex] = useState<number>(0)
-	const currentTab: string = tabs[activeTabIndex]
+
+	const getTabContent = (currentTab: string): ReactElement => {
+		const content: Record<string, JSX.Element> = {
+			Results: <ResultsContent project={project} />,
+			Evaluation: <EvaluationContent project={project} />
+		}
+		return content[currentTab]
+	}
 
 	const handleTabClick = (index: number) => {
 		setActiveTabIndex(index)
@@ -39,7 +49,7 @@ export default function ResultsTabs(): JSX.Element {
 				style={{ marginTop: '10px' }}
 				className='flex justify-center w-full items-center p-2'
 			>
-				{tabContent[currentTab]}
+				{getTabContent(tabs[activeTabIndex])}
 			</div>
 		</>
 	)
