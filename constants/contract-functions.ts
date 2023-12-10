@@ -49,8 +49,11 @@ export function evaluationContractWriteFunctions(
 		'proposeEvaluator'
 	)
 
+	const { mutateAsync: setEvidence } = useContractWrite(contract, 'setEvidence')
+
 	const functions: EvaluationFunctions = {
-		proposeEvaluator
+		proposeEvaluator,
+		setEvidence
 	}
 
 	return functions
