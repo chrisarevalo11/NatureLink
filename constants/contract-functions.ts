@@ -9,7 +9,10 @@ import {
 } from '@/models/contract-functions.model'
 
 export function natureLinkContractWriteFunctions(): NatureLinkFunctions {
-	const { data: contract } = useContract(natureLinkJson.address)
+	const { data: contract } = useContract(
+		natureLinkJson.address,
+		natureLinkJson.abi
+	)
 
 	const { mutateAsync: createProject } = useContractWrite(
 		contract,
