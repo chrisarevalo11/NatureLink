@@ -44,6 +44,11 @@ export function evaluationContractWriteFunctions(
 ): EvaluationFunctions {
 	const { data: contract } = useContract(address, evaluationJson.abi)
 
+	const { mutateAsync: evaluateEvidence } = useContractWrite(
+		contract,
+		'evaluateEvidence'
+	)
+
 	const { mutateAsync: proposeEvaluator } = useContractWrite(
 		contract,
 		'proposeEvaluator'
@@ -52,6 +57,7 @@ export function evaluationContractWriteFunctions(
 	const { mutateAsync: setEvidence } = useContractWrite(contract, 'setEvidence')
 
 	const functions: EvaluationFunctions = {
+		evaluateEvidence,
 		proposeEvaluator,
 		setEvidence
 	}
