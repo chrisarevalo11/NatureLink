@@ -3,7 +3,6 @@ import './globals.css'
 import Navbar from '@/components/Navbar'
 import { Providers } from './providers'
 import { Provider } from 'react-redux'
-import Snow from '@/components/Snow/Snow'
 
 export const metadata: Metadata = {
 	title: 'Naturelink ',
