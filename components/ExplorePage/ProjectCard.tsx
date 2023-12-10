@@ -1,28 +1,15 @@
 'use client'
 
 import { Project } from '@/models/contract-functions-args.model'
-import { getCrowdfundingContract } from '@/services/projects.services'
-import { Contract, ethers } from 'ethers'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
 
 type Props = {
 	project: Project
 }
 
-export const handleDate = (date: number): string => {
-	const dateObject: Date = new Date(date * 1000)
+export default function ProjectCard(props: Props): JSX.Element | null {
+	const { project } = props
 
-	const year = dateObject.getFullYear()
-	const month = dateObject.getMonth() + 1
-	const day = dateObject.getDate()
-
-	const dateFormatted = `${year}-${month}-${day}`
-
-	return dateFormatted
-}
-
-export default function ProjectCard({ project }: Props): JSX.Element | null {
 	const { id } = project
 	const { info, projectTimeStart, projectTimeEnd, amount } = project?.proposal
 	const { getMissingAmount } = project.stake
@@ -79,4 +66,16 @@ export default function ProjectCard({ project }: Props): JSX.Element | null {
 			</Link>
 		</div>
 	)
+}
+
+export function handleDate(date: number): string {
+	const dateObject: Date = new Date(date * 1000)
+
+	const year = dateObject.getFullYear()
+	const month = dateObject.getMonth() + 1
+	const day = dateObject.getDate()
+
+	const dateFormatted = `${year}-${month}-${day}`
+
+	return dateFormatted
 }

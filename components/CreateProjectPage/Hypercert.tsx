@@ -1,18 +1,25 @@
 'use client'
 
-import { formValuesTypes } from '@/app/create/page'
-import { Project } from '@/models/contract-functions-args.model'
 import { handleDate } from '../ExplorePage/ProjectCard'
+import { FormValuesTypes } from '@/app/create/page'
+import { ProposalState } from '@thirdweb-dev/sdk'
 
 type Props = {
-	project: Project
+	formValues: FormValuesTypes
 }
 
-export default function Hypercert({ project }: Props): JSX.Element {
-	const { info, projectTimeStart, projectTimeEnd } = project?.proposal
-	const infoArray: string[] = info.split(',')
+export default function Hypercert(props: Props): JSX.Element {
+	const { formValues } = props
+	const { projectName, bannerImage, logo, startDate, endDate, scopeTags } =
+		formValues
 
-	const [projectName, bannerImage, logo, , , scopeTags] = infoArray
+	const convertToUnixTime = (dateStr: string) => {
+		const date = new Date(dateStr)
+		return Math.floor(date.getTime() / 1000)
+	}
+
+	const startUnixTime = convertToUnixTime(startDate)
+	const endUnixTime = convertToUnixTime(endDate)
 
 	const tags: string[] = scopeTags.split(',')
 
@@ -55,11 +62,10 @@ export default function Hypercert({ project }: Props): JSX.Element {
 				</h1>
 				<div className='flex justify-evenly text-sm text-slate-400 border-b-[1px] border-solid border-gray-500 pb-3'>
 					<h2>
-						<span className='font-bold'>From:</span>{' '}
-						{handleDate(projectTimeStart)}
+						<span className='font-bold'>From:</span> {handleDate(startUnixTime)}
 					</h2>
 					<h2>
-						<span className='font-bold'>To:</span> {handleDate(projectTimeEnd)}
+						<span className='font-bold'>To:</span> {handleDate(endUnixTime)}
 					</h2>
 				</div>
 				<div className='flex justify-center flex-wrap gap-1 p-1'>

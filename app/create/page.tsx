@@ -1,10 +1,10 @@
 'use client'
 
-import React, { ReactNode, useState } from 'react'
+import { useState } from 'react'
 import ProjectForm from '@/components/CreateProjectPage/ProjectForm'
 import Hypercert from '@/components/CreateProjectPage/Hypercert'
 
-export type formValuesTypes = {
+export interface FormValuesTypes {
 	projectName: string
 	bannerImage: string
 	logo: string
@@ -18,7 +18,7 @@ export type formValuesTypes = {
 }
 
 export default function Create(): JSX.Element {
-	const [formValues, setFormValues] = useState<formValuesTypes>({
+	const initialValue: FormValuesTypes = {
 		projectName: '',
 		bannerImage: '',
 		logo: '',
@@ -29,7 +29,8 @@ export default function Create(): JSX.Element {
 		endDate: '',
 		scopeTags: '',
 		contributors: ''
-	})
+	}
+	const [formValues, setFormValues] = useState<FormValuesTypes>(initialValue)
 
 	return (
 		<section className='flex flex-col justify-evenly items-center my-3 w-full gap-4 md:gap-8'>

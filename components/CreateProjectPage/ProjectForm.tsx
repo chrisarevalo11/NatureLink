@@ -1,23 +1,24 @@
 import { BigNumber } from 'ethers'
 import { useFormik } from 'formik'
 import { ChangeEvent, Dispatch } from 'react'
-import { useDispatch } from 'react-redux'
-import { formValuesTypes } from '@/app/create/page'
 import { natureLinkContractWriteFunctions } from '@/constants/contract-functions'
 import { toDecimal } from '@/functions/utils'
 import FormField from './FormField'
 import FormTextarea from './FormTextarea'
+import { FormValuesTypes } from '@/app/create/page'
+import { useRouter } from 'next/navigation'
 
 type Props = {
-	formValues: formValuesTypes
-	setFormValues: Dispatch<React.SetStateAction<formValuesTypes>>
+	formValues: FormValuesTypes
+	setFormValues: Dispatch<React.SetStateAction<FormValuesTypes>>
 }
 
 export default function ProjectForm(props: Props): JSX.Element {
 	const { formValues, setFormValues } = props
+
 	const { createProject } = natureLinkContractWriteFunctions()
 
-	const dispatch = useDispatch()
+	const router = useRouter()
 
 	const handleChange = (
 		event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
@@ -47,6 +48,7 @@ export default function ProjectForm(props: Props): JSX.Element {
 			console.log('hash transaction', receipt.transactionHash)
 
 			alert('Project created!')
+			router.push('/explore')
 		}
 	})
 
@@ -148,7 +150,7 @@ export default function ProjectForm(props: Props): JSX.Element {
 }
 
 function createProjectArgsDtoToCreateProjectArgs(
-	formValues: formValuesTypes
+	formValues: FormValuesTypes
 ): any[] {
 	const {
 		projectName,
