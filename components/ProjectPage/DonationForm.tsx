@@ -69,24 +69,6 @@ export default function DonationForm(props: Props): JSX.Element {
 			return
 		}
 
-		const nowDate: Date = new Date()
-		const deadline: number | undefined = project?.stake.deadline
-
-		if (!deadline) {
-			alert('Deadline not found')
-			return
-		}
-
-		if (nowDate.getTime() > deadline) {
-			alert('Deadline is not reached')
-			return
-		}
-
-		if (project?.stake.getMissingAmount === 0) {
-			alert('Fundraising not finished')
-			return
-		}
-
 		const executeTx = execute({
 			overrides: { gasLimit: 6000000 }
 		})

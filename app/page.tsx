@@ -26,7 +26,6 @@ import {
 } from '@/services/projects.services'
 import { setProjects } from '@/store/slides/projectSlide'
 
-
 export default function Home() {
 	const address = useAddress()
 	const { execute: executeLogin, loading, data, error } = useLogin()
@@ -37,10 +36,10 @@ export default function Home() {
 
 	const { data: natureLinkContract } = useContract(natureLinkJson.address)
 
-	const {
-		data: proposalsDto,
-		isLoading,
-	} = useContractRead(natureLinkContract, 'getAllProjects')
+	const { data: proposalsDto, isLoading } = useContractRead(
+		natureLinkContract,
+		'getAllProjects'
+	)
 
 	const handleClaim = async () => {
 		if (address) {
@@ -129,12 +128,12 @@ export default function Home() {
 				pushComm: await contract.pushComm(),
 				crowdfunding: await contract.crowdfunding(),
 				evidence: await contract.evidence(),
+				evaluatorCounter: await contract.evaluatorCounter(),
 				judges: await contract.getAllJudges(),
 				evaluatorsSelected: await contract.getAllEvaluatorsSelected()
 			}
 
 			return evaluatorDto
-
 		}
 		useEffect(() => {
 			if (!isLoading) {
@@ -152,11 +151,8 @@ export default function Home() {
 			}
 		}, [isLoading])
 
-
-
 		return (
 			<div>
-
 				{loading && <p>Cargando perfil...</p>}
 				{data && <h1>{JSON.stringify(data)}</h1>}
 				<button className={'btn btn-primary'} onClick={login}>
@@ -175,7 +171,6 @@ export default function Home() {
 				) : (
 					<button onClick={() => console.log(proposals)}>Click me</button>
 				)}
-
 			</div>
 		)
 	}

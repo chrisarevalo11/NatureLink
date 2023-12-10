@@ -114,6 +114,7 @@ export default function Create(): JSX.Element {
 			pushComm: await contract.pushComm(),
 			crowdfunding: await contract.crowdfunding(),
 			evidence: await contract.evidence(),
+			evaluatorCounter: await contract.evaluatorCounter(),
 			judges: await contract.getAllJudges(),
 			evaluatorsSelected: await contract.getAllEvaluatorsSelected()
 		}
@@ -123,9 +124,13 @@ export default function Create(): JSX.Element {
 
 	return (
 		<>
-			<section className='flex flex-col items-center my-3 w-full'>
-				<ExploreTabs isSpinning={isSpinning} projects={projects} />
-			</section>
+			{isSpinning ? (
+				<p>Cargando proyectos...</p>
+			) : (
+				<section className='flex flex-col items-center my-3 w-full'>
+					<ExploreTabs projects={projects} />
+				</section>
+			)}
 		</>
 	)
 }
