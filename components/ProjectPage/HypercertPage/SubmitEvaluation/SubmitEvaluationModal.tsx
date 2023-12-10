@@ -35,7 +35,7 @@ export default function SubmitModal(props: Props): JSX.Element {
 					Answer the questions below regarding the impact of the project and the
 					quality of the results
 				</p>
-				<SubmitEvaluationForm project={project} />
+				<SubmitEvaluationForm closeModal={closeModal} project={project} />
 			</div>
 		</dialog>
 	)

@@ -14,8 +14,10 @@ type Props = {
 export default function ActionButton(props: Props): JSX.Element {
 	const { project } = props
 
-	const address: string | undefined =
-		'0x7753E5f36f20B14fFb6b6a61319Eb66f63abdb0b'
+	// const address: string | undefined =
+	// 	'0x7753E5f36f20B14fFb6b6a61319Eb66f63abdb0b'
+
+	const address: string | undefined = useAddress()
 
 	const user: string | undefined =
 		project?.proposal.creatorAddress === address

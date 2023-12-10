@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import ImagesCarousel from '../../ResultsSection/Results/ImagesCarousel'
 import RadioInput from './RadioInput'
@@ -9,69 +9,83 @@ import { evaluationContractWriteFunctions } from '@/constants/contract-functions
 import { Project } from '@/models/contract-functions-args.model'
 import { storageFile } from '@/functions/storeData'
 import { Evidence } from '@/models/evidence.model'
+import { Results } from '@/models/result.model'
 
 export type submitResultsType = {
-	images: File[]
-	latitude: string
-	longitude: string
-	files: File[]
-	links: string[]
+	images: number
+	coordinates: number
+	files: number
+	links: number
+	[key: string]: number
 }
 
 type Props = {
+	closeModal: () => void
 	project: Project
 }
 
 export default function SubmitForm(props: Props): JSX.Element {
-	const { project } = props
+	const { closeModal, project } = props
 
 	const initialValues: submitResultsType = {
-		images: [],
-		latitude: '',
-		longitude: '',
-		files: [],
+		images: 2,
+		coordinates: 2,
+		files: 2,
+		links: 2
+	}
+
+	const initialResults: Evidence = {
+		imagesUrl: [],
+		filesUrl: [],
+		footprint: '',
 		links: []
 	}
 
+	const [evidence, setEvicence] = useState<Evidence>(initialResults)
 	const [formValues, setFormValues] = useState<submitResultsType>(initialValues)
 
-	const { setEvidence } = evaluationContractWriteFunctions(
+	const [latitude, setLatitude] = useState<number>(0)
+	const [longitude, setLongitude] = useState<number>(0)
+	const evidenceString: string = project.evaluation.evidence
+
+	const { evaluateEvidence } = evaluationContractWriteFunctions(
 		project.proposal.evaluationAddress
 	)
+
+	useEffect(() => {
+		if (evidenceString !== '') {
+			const evidence: Evidence = JSON.parse(evidenceString)
+			console.log(' 💥 evidence 💥', evidence)
+
+			const footprint: string = evidence.footprint
+			const latitude: number = parseFloat(footprint.split(',')[0])
+			const longitude: number = parseFloat(footprint.split(',')[1])
+
+			setLatitude(latitude)
+			setLongitude(longitude)
+			setEvicence(evidence)
+		}
+	}, [])
 
 	const formik = useFormik({
 		initialValues: formValues,
 		onSubmit: async () => {
-			const imagesUrl: string[] = await Promise.all(
-				formValues.images.map(async (image: File) => {
-					return await storageFile(image)
-				})
-			)
+			console.log(formValues)
+			const { images, coordinates, files, links } = formValues
 
-			const filesUrl: string[] = await Promise.all(
-				formValues.files.map(async (file: File) => {
-					return await storageFile(file)
-				})
-			)
-
-			const footprint: string = `${formValues.latitude},${formValues.longitude}`
-			const links: string[] = formValues.links
-
-			const evidence: Evidence = {
-				imagesUrl,
-				footprint,
-				filesUrl,
-				links
+			const results: Results = {
+				images: images === 1 ? true : false,
+				footprint: coordinates === 1 ? true : false,
+				links: links === 1 ? true : false,
+				files: files === 1 ? true : false
 			}
 
-			const evidenceStrinfied: string = JSON.stringify(evidence)
-
-			if (!setEvidence) {
+			if (!evaluateEvidence) {
 				return
 			}
 
-			const setEvidenceTx = setEvidence({
-				args: [evidenceStrinfied],
+			const setEvidenceTx = evaluateEvidence({
+				args: [results.images, results.footprint, results.files, results.links],
 				overrides: { gasLimit: 6000000 }
 			})
 
@@ -79,6 +93,7 @@ export default function SubmitForm(props: Props): JSX.Element {
 			console.log('hash transaction', receipt.transactionHash)
 
 			alert('Evidence sent successfully')
+			closeModal()
 		}
 	})
 
@@ -89,7 +104,7 @@ export default function SubmitForm(props: Props): JSX.Element {
 				Are the following images related to the project development and add
 				value to the results?
 			</p>
-			<ImagesCarousel />
+			<ImagesCarousel imagesUrl={evidence.imagesUrl} />
 			<RadioInput
 				name={'images'}
 				formValues={formValues}
@@ -103,7 +118,7 @@ export default function SubmitForm(props: Props): JSX.Element {
 				Do the following coordinates match with the location that was previously
 				established by the owners?
 			</p>
-			<Map latitude={4.652939629022646} longitude={-74.11940985988831} />
+			<Map latitude={latitude} longitude={longitude} />
 			<RadioInput
 				name={'coordinates'}
 				formValues={formValues}
@@ -116,7 +131,7 @@ export default function SubmitForm(props: Props): JSX.Element {
 				Are the following links related to the project development and add value
 				to the results?
 			</p>
-			<UsefulLinks />
+			<UsefulLinks links={evidence.links} />
 			<RadioInput
 				name={'files'}
 				formValues={formValues}
@@ -129,7 +144,7 @@ export default function SubmitForm(props: Props): JSX.Element {
 				Are the following files related to the project development and add value
 				to the results?
 			</p>
-			<UsefulFiles />
+			<UsefulFiles filesUrl={evidence.filesUrl} />
 			<RadioInput
 				name={'links'}
 				formValues={formValues}
