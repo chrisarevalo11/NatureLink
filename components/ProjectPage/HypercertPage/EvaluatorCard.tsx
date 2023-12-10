@@ -1,7 +1,14 @@
+import { formatAddress } from '@/functions/utils'
 import Link from 'next/link'
 import { ReactElement } from 'react'
 
-export default function EvaluatorCard(): ReactElement {
+type Props = {
+	evaluator: string
+}
+
+export default function EvaluatorCard(props: Props): ReactElement {
+	const { evaluator } = props
+
 	return (
 		<Link
 			href={'/profile'}
@@ -15,7 +22,9 @@ export default function EvaluatorCard(): ReactElement {
 				}}
 				className='w-12 h-12 rounded-full'
 			></figure>
-			<h2 className='font-bold text-sm lg:text-md'>0x13db...24d7</h2>
+			<h2 className='font-bold text-sm lg:text-md'>
+				{formatAddress(evaluator)}
+			</h2>
 		</Link>
 	)
 }

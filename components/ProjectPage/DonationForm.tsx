@@ -1,9 +1,8 @@
 'use client'
 
-import { ReactNode, use, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 import { useFormik } from 'formik'
-import { useAppSelector } from '@/store'
 import { Project } from '@/models/contract-functions-args.model'
 import { crowdfundingContractWriteFunctions } from '@/constants/contract-functions'
 import { useAddress } from '@thirdweb-dev/react'
@@ -82,7 +81,7 @@ export default function DonationForm(props: Props): JSX.Element {
 	const formik = useFormik({
 		initialValues: values,
 		onSubmit: async () => {
-			console.log(values)
+			const valuesBI: bigint = BigInt(values.amount)
 			console.log('project', project)
 
 			const missingAmount: number | undefined = project?.stake.getMissingAmount
@@ -92,7 +91,7 @@ export default function DonationForm(props: Props): JSX.Element {
 				return
 			}
 
-			if (values.amount > missingAmount) {
+			if (valuesBI > missingAmount) {
 				alert('Amount must be less or equal than threshold')
 				return
 			}
@@ -108,7 +107,7 @@ export default function DonationForm(props: Props): JSX.Element {
 			}
 
 			const stakeTx = stake({
-				overrides: { gasLimit: 6000000, value: values.amount }
+				overrides: { gasLimit: 6000000, value: BigInt(60) }
 			})
 
 			const { receipt } = await stakeTx
@@ -137,7 +136,7 @@ export default function DonationForm(props: Props): JSX.Element {
 			</div>
 			<button
 				className='btn btn-primary btn-wide'
-				disabled={values.amount === 0 || isNaN(values.amount)}
+				disabled={values.amount < 0 || isNaN(values.amount)}
 				type='submit'
 			>
 				{' '}

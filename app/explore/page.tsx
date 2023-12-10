@@ -135,13 +135,9 @@ export default function Create(): JSX.Element {
 
 	return (
 		<>
-			{isSpinning ? (
-				<p>Cargando proyectos...</p>
-			) : (
-				<section className='flex flex-col items-center my-3 w-full'>
-					<ExploreTabs projects={projects} />
-				</section>
-			)}
+			<section className='flex flex-col items-center my-3 w-full'>
+				<ExploreTabs isSpinning={isSpinning} projects={projects} />
+			</section>
 		</>
 	)
 }

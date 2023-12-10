@@ -1,15 +1,18 @@
 'use client'
 
 import { formValuesTypes } from '@/app/create/page'
+import { Project } from '@/models/contract-functions-args.model'
+import { handleDate } from '../ExplorePage/ProjectCard'
 
 type Props = {
-	formValues: formValuesTypes
+	project: Project
 }
 
-export default function Hypercert(props: Props): JSX.Element {
-	const { formValues } = props
-	const { projectName, bannerImage, logo, startDate, endDate, scopeTags } =
-		formValues
+export default function Hypercert({ project }: Props): JSX.Element {
+	const { info, projectTimeStart, projectTimeEnd } = project?.proposal
+	const infoArray: string[] = info.split(',')
+
+	const [projectName, bannerImage, logo, , , scopeTags] = infoArray
 
 	const tags: string[] = scopeTags.split(',')
 
@@ -52,10 +55,11 @@ export default function Hypercert(props: Props): JSX.Element {
 				</h1>
 				<div className='flex justify-evenly text-sm text-slate-400 border-b-[1px] border-solid border-gray-500 pb-3'>
 					<h2>
-						<span className='font-bold'>From:</span> {startDate}
+						<span className='font-bold'>From:</span>{' '}
+						{handleDate(projectTimeStart)}
 					</h2>
 					<h2>
-						<span className='font-bold'>To:</span> {endDate}
+						<span className='font-bold'>To:</span> {handleDate(projectTimeEnd)}
 					</h2>
 				</div>
 				<div className='flex justify-center flex-wrap gap-1 p-1'>

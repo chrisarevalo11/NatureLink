@@ -1,5 +1,5 @@
 'use client'
-import { useClaimHandle, useLogin } from '@lens-protocol/react-web'
+import { ProfileId, useClaimHandle, useLogin } from '@lens-protocol/react-web'
 import { useAddress } from '@thirdweb-dev/react'
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
@@ -59,7 +59,7 @@ export default function Home() {
 	const login = async () => {
 		if (address) {
 			try {
-				const result = await executeLogin({ address })
+				const result = await executeLogin({ address: address })
 				console.log(result)
 			} catch (err) {
 				console.error('Error during login:', err)
@@ -67,121 +67,119 @@ export default function Home() {
 		} else {
 			console.error('Wallet address not found. Please connect your wallet.')
 		}
+	}
+	const fetchProject = async (proposal: Propousal): Promise<Project> => {
+		const ethereum = (window as any).ethereum
+		const provider: ethers.providers.Web3Provider =
+			new ethers.providers.Web3Provider(ethereum)
 
-		const fetchProject = async (proposal: Propousal): Promise<Project> => {
-			const ethereum = (window as any).ethereum
-			const provider: ethers.providers.Web3Provider =
-				new ethers.providers.Web3Provider(ethereum)
+		await provider.send('eth_requestAccounts', [])
 
-			await provider.send('eth_requestAccounts', [])
+		const signer: ethers.providers.JsonRpcSigner = provider.getSigner()
 
-			const signer: ethers.providers.JsonRpcSigner = provider.getSigner()
+		const crowdfundingContract: Contract = getCrowdfundingContract(
+			proposal.crowdfundingAddress,
+			signer
+		)
+		const evaluationContract: Contract = getEvaluationContract(
+			proposal.evaluationAddress,
+			signer
+		)
 
-			const crowdfundingContract: Contract = getCrowdfundingContract(
-				proposal.crowdfundingAddress,
-				signer
+		const stakeDto: StakeDto = await fetchStakeDto(crowdfundingContract)
+		const evaluatorDto: EvaluationDto =
+			await fetchEvaluationDto(evaluationContract)
+
+		const stake: Stake = stakeDtoToStake(stakeDto)
+		const evaluation: Evaluation = evaluationDtoToEvaluation(evaluatorDto)
+
+		const evaluatorCounter: number = evaluation.evaluatorCounter
+
+		for (let index = 0; index < evaluatorCounter; index++) {
+			const evaluator: string = await evaluationContract.evaluators(index)
+			evaluation.evaluators.push(evaluator)
+		}
+
+		return {
+			id: proposal.id,
+			proposal,
+			stake,
+			evaluation
+		}
+	}
+
+	const fetchStakeDto = async (contract: Contract): Promise<StakeDto> => {
+		const stakeDto: StakeDto = {
+			openForStake: await contract.openForStake(),
+			openForWithdraw: await contract.openForWithdraw(),
+			bounty: await contract.bounty(),
+			fee: await contract.fee(),
+			deadline: await contract.deadline(),
+			tokenIdCounter: await contract.tokenIdCounter(),
+			getMissingAmount: await contract.getMissingAmount(),
+			threshold: await contract.threshold(),
+			creator: await contract.creator(),
+			treasuryAddress: await contract.treasuryAddress(),
+			hypercertsAddress: await contract.hypercerts(),
+			pushCommAddress: await contract.pushComm(),
+			stakers: await contract.getStakers(),
+			info: await contract.info()
+		}
+
+		return stakeDto
+	}
+
+	const fetchEvaluationDto = async (
+		contract: Contract
+	): Promise<EvaluationDto> => {
+		const evaluatorDto: EvaluationDto = {
+			vrfConsumer: await contract.vrfConsumer(),
+			pushComm: await contract.pushComm(),
+			crowdfunding: await contract.crowdfunding(),
+			evidence: await contract.evidence(),
+			evaluatorCounter: await contract.evaluatorCounter(),
+			judges: await contract.getAllJudges(),
+			evaluatorsSelected: await contract.getAllEvaluatorsSelected()
+		}
+
+		return evaluatorDto
+	}
+	useEffect(() => {
+		if (!isLoading) {
+			const proposals: Propousal[] = propousalDtoToPropousal(proposalsDto)
+
+			Promise.all(proposals.map(fetchProject)).then(
+				(fetchedProjects: Project[]) => {
+					dispatch(setProjects(fetchedProjects))
+					setIsSpinning(false)
+				}
 			)
-			const evaluationContract: Contract = getEvaluationContract(
-				proposal.evaluationAddress,
-				signer
-			)
 
-			const stakeDto: StakeDto = await fetchStakeDto(crowdfundingContract)
-			const evaluatorDto: EvaluationDto =
-				await fetchEvaluationDto(evaluationContract)
-
-			const stake: Stake = stakeDtoToStake(stakeDto)
-			const evaluation: Evaluation = evaluationDtoToEvaluation(evaluatorDto)
-
-			const evaluatorCounter: number = evaluation.evaluatorCounter
-
-			for (let index = 0; index < evaluatorCounter; index++) {
-				const evaluator: string = await evaluationContract.evaluators(index)
-				evaluation.evaluators.push(evaluator)
-			}
-
-			return {
-				id: proposal.id,
-				proposal,
-				stake,
-				evaluation
-			}
+			dispatch(setPropousals(proposals))
+			setIsSpinning(false)
 		}
+	}, [isLoading])
 
-		const fetchStakeDto = async (contract: Contract): Promise<StakeDto> => {
-			const stakeDto: StakeDto = {
-				openForStake: await contract.openForStake(),
-				openForWithdraw: await contract.openForWithdraw(),
-				bounty: await contract.bounty(),
-				fee: await contract.fee(),
-				deadline: await contract.deadline(),
-				tokenIdCounter: await contract.tokenIdCounter(),
-				getMissingAmount: await contract.getMissingAmount(),
-				threshold: await contract.threshold(),
-				creator: await contract.creator(),
-				treasuryAddress: await contract.treasuryAddress(),
-				hypercertsAddress: await contract.hypercerts(),
-				pushCommAddress: await contract.pushComm(),
-				stakers: await contract.getStakers(),
-				info: await contract.info()
-			}
+	return (
+		<div>
+			{loading && <p>Cargando perfil...</p>}
+			{data && <h1>{JSON.stringify(data)}</h1>}
+			<button className={'btn btn-primary'} onClick={login}>
+				Login
+			</button>
+			<button className={'btn btn-primary'} onClick={handleClaim}>
+				Claim Handle
+			</button>
 
-			return stakeDto
-		}
-
-		const fetchEvaluationDto = async (
-			contract: Contract
-		): Promise<EvaluationDto> => {
-			const evaluatorDto: EvaluationDto = {
-				vrfConsumer: await contract.vrfConsumer(),
-				pushComm: await contract.pushComm(),
-				crowdfunding: await contract.crowdfunding(),
-				evidence: await contract.evidence(),
-				evaluators: [],
-				evaluatorCounter: await contract.evaluatorCounter(),
-				judges: await contract.getAllJudges(),
-				evaluatorsSelected: await contract.getAllEvaluatorsSelected()
-			}
-
-			return evaluatorDto
-		}
-		useEffect(() => {
-			if (!isLoading) {
-				const proposals: Propousal[] = propousalDtoToPropousal(proposalsDto)
-
-				Promise.all(proposals.map(fetchProject)).then(
-					(fetchedProjects: Project[]) => {
-						dispatch(setProjects(fetchedProjects))
-						setIsSpinning(false)
-					}
-				)
-
-				dispatch(setPropousals(proposals))
-				setIsSpinning(false)
-			}
-		}, [isLoading])
-
-		return (
-			<div>
-				{loading && <p>Cargando perfil...</p>}
-				{data && <h1>{JSON.stringify(data)}</h1>}
-				<button className={'btn btn-primary'} onClick={login}>
-					Login
-				</button>
-				<button className={'btn btn-primary'} onClick={handleClaim}>
-					Claim Handle
-				</button>
-
-				{/* 
+			{/* 
       {loading && <p>Cargando perfil...</p>}
       {error && <p>Error al cargar el perfil.</p>}
       {handle && <h1>{JSON.stringify(handle)}</h1>} */}
-				{isSpinning ? (
-					<p>Cargando proyectos...</p>
-				) : (
-					<button onClick={() => console.log(proposals)}>Click me</button>
-				)}
-			</div>
-		)
-	}
+			{isSpinning ? (
+				<p>Cargando proyectos...</p>
+			) : (
+				<button onClick={() => console.log(proposals)}>Click me</button>
+			)}
+		</div>
+	)
 }

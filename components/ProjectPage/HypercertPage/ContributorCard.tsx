@@ -1,7 +1,13 @@
+import { formatAddress } from '@/functions/utils'
 import Link from 'next/link'
-import { ReactElement } from 'react'
 
-export default function ContributorCard(): ReactElement {
+type Props = {
+	contributor: string
+}
+
+export default function ContributorCard(props: Props): JSX.Element {
+	const { contributor } = props
+
 	return (
 		<Link
 			href='/profile'
@@ -16,10 +22,9 @@ export default function ContributorCard(): ReactElement {
 				className='w-12 h-12 rounded-full'
 			></figure>
 			<div className='flex flex-col items-start gap-1'>
-				<h2 className='font-bold text-sm lg:text-md'>0x13db...24d7</h2>
-				<span className='text-xs lg:text-sm line-clamp-1 text-gray-500'>
-					25% contributed
-				</span>
+				<h2 className='font-bold text-sm lg:text-md my-2'>
+					{formatAddress(contributor)}
+				</h2>
 			</div>
 		</Link>
 	)
