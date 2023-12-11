@@ -1,6 +1,6 @@
 <h1 align="center">Naturelink</h1>
 <p align="center">
-  <img src="https://github.com/chrisarevalo11/NatureLink/blob/main/images/logo.png" width="300" title="Green Gate Name Logo">
+  <img src="https://github.com/chrisarevalo11/NatureLink/blob/main/images/logo.png" width="250" title="Green Gate Name Logo">
 </p>
 
 NatureLink Contracts [NatureLink contracts](https://github.com/salviega/naturelink-contracts).
