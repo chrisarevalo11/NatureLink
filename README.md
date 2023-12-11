@@ -3,7 +3,8 @@
   <img src="https://github.com/chrisarevalo11/NatureLink/blob/main/images/logo.png" width="250" title="Green Gate Name Logo">
 </p>
 
-NatureLink Contracts [NatureLink contracts](https://github.com/salviega/naturelink-contracts).
+NatureLink Contracts [NatureLink contracts](https://github.com/salviega/naturelink-contracts)
+AWS Lambda [Twilio lambda](https://github.com/RookieCol/lamda_sms_twilio)
 
 ## Pain Points Being Addressed:
 
