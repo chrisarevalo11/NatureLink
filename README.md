@@ -1,6 +1,6 @@
 <h1 align="center">Naturelink</h1>
 <p align="center">
-  <img src="https://github.com/chrisarevalo11/NatureLink/blob/main/images/natureLinkLogo.png" width="300" title="Green Gate Name Logo">
+  <img src="https://github.com/chrisarevalo11/NatureLink/blob/main/images/logo.png" width="300" title="Green Gate Name Logo">
 </p>
 
 NatureLink Contracts [NatureLink contracts](https://github.com/salviega/naturelink-contracts).
@@ -14,7 +14,7 @@ NatureLink Contracts [NatureLink contracts](https://github.com/salviega/natureli
 Naturelink is a blockchain-based social network for ecological crowdfunding, featuring on-chain reputation to ensure transparency and trust in environmental projects. It uses evaluators and native tokens for validation and compensation.
 
 <p align="center">
-  <img src="https://github.com/chrisarevalo11/NatureLink/blob/main/images/natureLinkDiagram.png" width="300" title="Green Gate Name Logo">
+  <img src="https://github.com/chrisarevalo11/NatureLink/blob/main/images/natureLinkDiagram.png" width="500 " title="Green Gate Name Logo">
 </p>
 
 **Tools**
