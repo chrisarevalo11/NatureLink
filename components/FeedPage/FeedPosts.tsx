@@ -17,11 +17,7 @@ export default function FeedPosts(): ReactElement {
 		},
 		orderBy: ExplorePublicationsOrderByType.Latest
 	})
-
-	if (publications) {
-		console.log(publications)
-	}
-
+	
 	return (
 		<div className='p-2 bg-gray-900 rounded-xl flex flex-col gap-2 items-center w-full max-w-[600px]'>
 			<ShareAPost />

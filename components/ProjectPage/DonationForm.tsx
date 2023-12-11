@@ -73,7 +73,6 @@ export default function DonationForm(props: Props): JSX.Element {
 		})
 
 		const { receipt } = await executeTx
-		console.log('hash transaction', receipt.transactionHash)
 
 		alert('Funds executed!')
 	}
@@ -82,7 +81,6 @@ export default function DonationForm(props: Props): JSX.Element {
 		initialValues: values,
 		onSubmit: async () => {
 			const valuesBI: bigint = BigInt(values.amount)
-			console.log('project', project)
 
 			const missingAmount: number | undefined = project?.stake.getMissingAmount
 
@@ -111,7 +109,6 @@ export default function DonationForm(props: Props): JSX.Element {
 			})
 
 			const { receipt } = await stakeTx
-			console.log('hash transaction', receipt.transactionHash)
 
 			alert('Project created!')
 		}

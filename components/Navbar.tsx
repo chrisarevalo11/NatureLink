@@ -19,10 +19,8 @@ export default function Component() {
 			try {
 				const result: any = await executeLogin({ address: address })
 			} catch (err) {
-				console.error('Error during login:', err)
 			}
 		} else {
-			console.error('Wallet address not found. Please connect your wallet.')
 		}
 	}
 

@@ -11,12 +11,9 @@ export default function FeedProfileCard(): ReactElement {
 		if (address) {
 			try {
 				const result = await executeLogin({ address: address })
-				console.log(result)
 			} catch (err) {
-				console.error('Error during login:', err)
 			}
 		} else {
-			console.error('Wallet address not found. Please connect your wallet.')
 		}
 	}
 

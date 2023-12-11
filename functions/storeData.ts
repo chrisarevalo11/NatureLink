@@ -50,7 +50,6 @@ export async function storageFile(file: File): Promise<string> {
 		wrapWithDirectory: false
 	})
 
-	console.log('Stored file with CID: ', `${ipfs}/${cid}`)
 
 	return `${ipfs}/${cid}`
 }
@@ -70,13 +69,11 @@ export async function storeOpenSeaMetadata(
 	const blob = new Blob([JSON.stringify(obj)], { type: 'application/json' })
 	const files = [new File([blob], 'metadata.json')]
 
-	console.log('Uploading metadata to IPFS via web3.storage')
 
 	const cid = await client.put(files, {
 		wrapWithDirectory: false
 	})
 
-	console.log('Stored metadata with CID:', `${ipfs}/${cid}`)
 
 	return `${ipfs}/${cid}`
 }

@@ -34,7 +34,6 @@ export default function ProjectForm(props: Props): JSX.Element {
 	const formik = useFormik({
 		initialValues: formValues,
 		onSubmit: async () => {
-			console.log(formValues)
 			const args: any[] = createProjectArgsDtoToCreateProjectArgs(formValues)
 
 			if (!createProject) return <div>ERROR!</div>
@@ -45,7 +44,6 @@ export default function ProjectForm(props: Props): JSX.Element {
 			})
 
 			const { receipt } = await createProjectTx
-			console.log('hash transaction', receipt.transactionHash)
 
 			alert('Project created!')
 			router.push('/explore')
@@ -180,8 +178,6 @@ function createProjectArgsDtoToCreateProjectArgs(
 		evaluationTime, // _evaluationTime
 		info // _info
 	]
-
-	console.log('args: ', args)
 
 	return args
 }

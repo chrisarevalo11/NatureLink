@@ -55,7 +55,6 @@ export default function SubmitForm(props: Props): JSX.Element {
 	useEffect(() => {
 		if (evidenceString !== '') {
 			const evidence: Evidence = JSON.parse(evidenceString)
-			console.log(' 💥 evidence 💥', evidence)
 
 			const footprint: string = evidence.footprint
 			const latitude: number = parseFloat(footprint.split(',')[0])
@@ -70,7 +69,6 @@ export default function SubmitForm(props: Props): JSX.Element {
 	const formik = useFormik({
 		initialValues: formValues,
 		onSubmit: async () => {
-			console.log(formValues)
 			const { images, coordinates, files, links } = formValues
 
 			const results: Results = {
@@ -90,7 +88,6 @@ export default function SubmitForm(props: Props): JSX.Element {
 			})
 
 			const { receipt } = await setEvidenceTx
-			console.log('hash transaction', receipt.transactionHash)
 
 			alert('Evidence sent successfully')
 			closeModal()
