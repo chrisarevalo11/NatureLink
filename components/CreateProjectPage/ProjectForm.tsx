@@ -1,12 +1,14 @@
 import { BigNumber } from 'ethers'
 import { useFormik } from 'formik'
-import { ChangeEvent, Dispatch } from 'react'
+import { ChangeEvent, Dispatch, useState } from 'react'
 import { natureLinkContractWriteFunctions } from '@/constants/contract-functions'
 import { toDecimal } from '@/functions/utils'
 import FormField from './FormField'
 import FormTextarea from './FormTextarea'
 import { FormValuesTypes } from '@/app/create/page'
 import { useRouter } from 'next/navigation'
+import {Oval} from 'react-loader-spinner'
+import { ToastContainer, toast } from 'react-toastify';
 
 type Props = {
 	formValues: FormValuesTypes
@@ -15,6 +17,7 @@ type Props = {
 
 export default function ProjectForm(props: Props): JSX.Element {
 	const { formValues, setFormValues } = props
+	const [isLoading, setIsLoading] = useState<boolean>(false)
 
 	const { createProject } = natureLinkContractWriteFunctions()
 
@@ -37,6 +40,7 @@ export default function ProjectForm(props: Props): JSX.Element {
 			const args: any[] = createProjectArgsDtoToCreateProjectArgs(formValues)
 
 			if (!createProject) return <div>ERROR!</div>
+			setIsLoading(true)
 
 			const createProjectTx = createProject({
 				args,
@@ -45,8 +49,9 @@ export default function ProjectForm(props: Props): JSX.Element {
 
 			const { receipt } = await createProjectTx
 
-			alert('Project created!')
+			setIsLoading(false)
 			router.push('/explore')
+			toast('Event created!');
 		}
 	})
 
@@ -139,8 +144,23 @@ export default function ProjectForm(props: Props): JSX.Element {
 						type='submit'
 						className='btn btn-primary btn-wide border-none mb-5'
 					>
-						Create
+						{isLoading 
+						? <Oval
+						height={30}
+						width={30}
+						color="#fff"
+						wrapperStyle={{}}
+						wrapperClass=""
+						visible={true}
+						ariaLabel='oval-loading'
+						secondaryColor="#fff"
+						strokeWidth={2}
+						strokeWidthSecondary={2}
+					  
+					  />
+						: 'Create'}
 					</button>
+					<ToastContainer />
 				</div>
 			</form>
 		</div>
