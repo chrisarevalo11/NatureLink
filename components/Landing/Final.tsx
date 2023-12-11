@@ -14,7 +14,9 @@ export default function Create(): JSX.Element {
 					<span className='text-primary font-bold'>build trust</span> by
 					showcasing your effective support in your profile.
 				</h1>
-				<Link className='btn btn-primary' href={'/home'}>Start journey</Link>
+				<Link className='btn btn-primary' href={'/home'}>
+					Start journey
+				</Link>
 			</div>
 			<div className='flex justify-center order-2 md:order-1'>
 				<Image

@@ -5,7 +5,7 @@ import { useAddress } from '@thirdweb-dev/react'
 import { useLogin } from '@lens-protocol/react-web'
 
 export default function FeedProfileCard(): ReactElement {
-	const { execute: executeLogin} = useLogin()
+	const { execute: executeLogin } = useLogin()
 	const address = useAddress()
 	const login = async () => {
 		if (address) {

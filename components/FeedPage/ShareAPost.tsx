@@ -15,7 +15,6 @@ export default function ShareAPost(): ReactElement {
 
 	const { execute, error, loading } = useCreatePost()
 
-
 	const maxLength = 250
 
 	const handleChange: ChangeEventHandler<HTMLTextAreaElement> = e => {
@@ -53,7 +52,6 @@ export default function ShareAPost(): ReactElement {
 					Post
 				</button>
 			</form>
-
 		</div>
 	)
 }
