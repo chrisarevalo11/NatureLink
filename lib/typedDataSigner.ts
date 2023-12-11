@@ -46,7 +46,6 @@ export function useTypedDataSignerWrapper(
 ): (Signer & TypedDataSigner) | undefined {
 	const signerWithTypedData = useMemo(() => {
 		if (signer && sdk) {
-			console.log({ signer, sdk })
 			return addTypedDataToSigner(signer, sdk)
 		}
 		return undefined

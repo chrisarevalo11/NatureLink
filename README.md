@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">Naturelink</h1>
+<p align="center">
+  <img src="https://github.com/chrisarevalo11/NatureLink/blob/main/images/logo.png" width="250" title="Green Gate Name Logo">
+</p>
 
-## Getting Started
+NatureLink Contracts [NatureLink contracts](https://github.com/salviega/naturelink-contracts)
 
-First, run the development server:
+AWS Lambda [Twilio lambda](https://github.com/RookieCol/lamda_sms_twilio)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Pain Points Being Addressed:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. **Lack of Transparency:** A major concern in crowdfunding is knowing exactly how the funds are being utilized. The platform ensures transparency by utilizing Hypercerts, which provide clear details about the project and its financing.
+2. **Impact Verification:** Many funders wish to see tangible evidence of the impact of their investment. With the integration of evaluators, the platform ensures that the promised impact is being achieved.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Naturelink is a blockchain-based social network for ecological crowdfunding, featuring on-chain reputation to ensure transparency and trust in environmental projects. It uses evaluators and native tokens for validation and compensation.
 
-## Learn More
+<p align="center">
+  <img src="https://github.com/chrisarevalo11/NatureLink/blob/main/images/natureLinkDiagram.png" width="800 " title="Green Gate Name Logo">
+</p>
 
-To learn more about Next.js, take a look at the following resources:
+**Tools**
+- Lens
+- Thirdweb 
+- Hypercerts
+- Chainlink
+   - Functions: Notifying the donation in projects through an AWS lambda powered by Twilio.
+   - Keepers: Programmatically checking if the project's funding period has finished and deciding whether to return the crowdfunding or to mint the hypercert.
+   - VRF: Used to select the evaluator for each project.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+**Naturelink** is a blockchain-based social network focused on ecological crowdfunding. It utilizes on-chain reputation to ensure transparency, reliability, and effectiveness of the presented projects. Users on this platform can present, fund, and evaluate projects centered around ecological and environmental causes. Operating on a blockchain ensures the immutability and traceability of interactions, as well as building a trustworthy digital reputation for its users.
 
-## Deploy on Vercel
+**Main Features:**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. **On-Chain Reputation:** Users build a digital reputation based on their interactions, submitted projects, funding activities, and evaluations. This reputation is immutable and transparent, fostering trust among network participants.
+2. **Hypercerts:** These on-chain digital certificates provide details about each project, ensuring that funders have all the necessary information to make informed decisions.
+3. **Reputable Evaluators:** Certain users are selected as evaluators within the community, based on their on-chain reputation. They are responsible for verifying the actual impact of funded projects, adding a layer of trust and validation to the process.
+4. **Community Participation:** The network facilitates discussion and debate around projects, promoting a culture of transparency and cooperation. Interactions are recorded on the chain, contributing to each user's reputation building.
+5. **On-Chain Impact Verification:** Beyond presenting projects, the platform offers tools and mechanisms on-chain to ensure that raised funds are used appropriately and that projects create a real impact, validated by the community and recorded on the blockchain.

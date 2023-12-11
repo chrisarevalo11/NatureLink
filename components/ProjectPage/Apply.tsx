@@ -24,7 +24,6 @@ export default function Apply(props: Props): JSX.Element {
 		})
 
 		const { receipt } = await proposeEvaluatorTx
-		console.log('hash transaction', receipt.transactionHash)
 
 		alert('Pproposed evaluator')
 	}

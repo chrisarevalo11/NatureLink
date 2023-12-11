@@ -83,7 +83,6 @@ export default function SubmitForm(props: Props): JSX.Element {
 			})
 
 			const { receipt } = await setEvidenceTx
-			console.log('hash transaction', receipt.transactionHash)
 
 			alert('Evidence sent successfully')
 			closeModal()
