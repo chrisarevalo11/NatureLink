@@ -29,7 +29,6 @@ export default function ResultsContent(props: Props): JSX.Element {
 		if (evidenceString !== '') {
 			const evidence: Evidence = JSON.parse(evidenceString)
 
-			console.log(' 💥 evidence 💥', evidence)
 			setEvicence(evidence)
 			setAreResults(true)
 		}
