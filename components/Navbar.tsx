@@ -62,12 +62,12 @@ export default function Component() {
 						backgroundColor: '#1EB854',
 						color: 'white',
 						fontWeight: 'bold',
-						padding: '8px 16px' // py-2 px-4 equivalente
+						padding: '8px 16px'
 					}}
 				/>
 				{address && (
 					<button
-						className='btn-primary btn hover:bg-blue-700 text-white my-4 font-bold py-2 px-5 rounded-xl focus:outline-none focus:shadow-outline'
+						className='btn btn-primary'
 						onClick={() => login().then(() => router.push('/home'))}
 					>
 						Login
