@@ -10,7 +10,7 @@ export interface Evaluation {
 	evaluators: string[]
 	evaluatorCounter: number
 	evidence: string
-	judges: string[]
+	judges: boolean[][]
 	evaluatorsSelected: string[]
 }
 
@@ -21,7 +21,7 @@ export interface EvaluationDto {
 	evaluators: string[]
 	evaluatorCounter: BigIntDto
 	evidence: string
-	judges: string[]
+	judges: boolean[][]
 	evaluatorsSelected: string[]
 }
 

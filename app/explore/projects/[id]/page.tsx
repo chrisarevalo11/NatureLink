@@ -20,6 +20,8 @@ export default function Page(): JSX.Element {
 	const router = useRouter()
 	const pathname: string = usePathname()
 
+	console.log('💥 project 💥', project)
+
 	useEffect(() => {
 		const pathnameSplited: string[] = pathname.split('/')
 		const slug: string = pathnameSplited[pathnameSplited.length - 1]

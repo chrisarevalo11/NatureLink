@@ -17,6 +17,8 @@ export default function Page(): JSX.Element {
 		state => state.project.projectSelected
 	)
 
+	console.log('💥 project 💥', project)
+
 	const dispatch = useDispatch<AppDispatch>()
 	const router = useRouter()
 	const pathname: string = usePathname()
